@@ -10,38 +10,30 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/Servlet")
+@WebServlet("*.do")
 public class Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
 	public Servlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.setContentType("text/html;charset=UTF-8");
 		RequestDispatcher rd;
 		ServletContext sc;
 		String pagina = "";
-		String comando = request.getContextPath();
+		String path = request.getServletPath();
+		String comando = path.substring(1, path.lastIndexOf(".do"));
 		switch (comando) {
-		case "/create-prestito":
+		case "create-prestito":
 			break;
-		case "/update-prestito":
+		case "update-prestito":
 			break;
-		case "/search-prestito":
+		case "search-prestito":
 			break;
-		case "/delete-prestito":
+		case "delete-prestito":
 			break;
 		}
 		sc = getServletContext();
@@ -49,14 +41,14 @@ public class Servlet extends HttpServlet {
 		rd.forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		processRequest(request, response);
+	}
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		processRequest(request, response);
 	}
 
 }

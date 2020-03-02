@@ -1,17 +1,31 @@
 package serviceimpl;
 
+import java.util.List;
+
 import model.Prestito;
 import model.dao.PrestitoDao;
 import service.PrestitoService;
+import utilities.Eccezione;
 
 public class PrestitoServiceImpl implements PrestitoService {
 
 	@Override
-	public void createPrestito(Prestito p) {
-		Prestito prestito = new Prestito();
-		prestito.setDataInizio(p.getDataInizio());
-		prestito.setUtente(p.getUtente());
-		prestito.setLibro(p.getLibro());
-		PrestitoDao.createPrestito(prestito);
+	public void createPrestito(Prestito p) throws Eccezione {
+		PrestitoDao.createPrestito(p);
+	}
+
+	@Override
+	public void updatePrestito(Prestito p) throws Eccezione {
+		PrestitoDao.updatePrestito(p);
+	}
+
+	@Override
+	public void deletePrestito(Long idPrestito) throws Eccezione {
+		PrestitoDao.deletePrestito(idPrestito);
+	}
+
+	@Override
+	public List<Prestito> searchPrestito() throws Eccezione {
+		return PrestitoDao.findAllPrestito();
 	}
 }
