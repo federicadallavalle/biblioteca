@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import static model.dao.DataBase.getConnection;
-
 import model.Utente;
 import utilities.Eccezione;
 
@@ -46,10 +45,70 @@ public class UtenteDao {
 
 	public static void creaUtente(Utente utente) throws Eccezione {
 		Connection conn = getConnection();
-
 		String sql = "INSERT INTO biblioteca.utente "
-				+ "(id, nome, cognome, email, telefono, via, civico, citta, procincia, cap, ruolo, username, password) "
-				+ "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				+ "(nome, cognome, email, telefono, via, civico, citta, procincia, cap, ruolo, username, password) "
+				+ "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement ps = null;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, utente.getNome());
+			ps.setString(2, utente.getCognome());
+			ps.setString(3, utente.getEmail());
+			ps.setString(4, utente.getTelefono());
+			ps.setString(5, utente.getVia());
+			ps.setString(6, utente.getCivico());
+			ps.setString(7, utente.getCitta());
+			ps.setString(8, utente.getProvincia());
+			ps.setString(9, utente.getCap());
+			ps.setString(10, utente.getRuolo());
+			ps.setString(11, utente.getUsername());
+			ps.setString(12, utente.getPassword());
+			ps.close();
+			conn.close();
+		} catch (SQLException e) {
+			throw new Eccezione(e.getMessage());
+		}
+	}
+
+	public static void eliminaUtente(int id) throws Eccezione {
+		Connection conn = getConnection();
+		String sql = "DELETE FROM biblioteca.utente WHERE id = ?";
+		PreparedStatement ps = null;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, id);
+			ps.executeUpdate();
+			System.out.println("Cancellazione eseguita");
+		} catch (SQLException e) {
+			throw new Eccezione(e.getMessage());
+		}
+	}
+
+	public static void modifica(Utente utente, int id) throws Eccezione {
+		Connection conn = getConnection();
+		String sql = "UPDATE biblioteca.utente "
+				+ " SET nome = ?, cognome = ?, email = ?, telefono = ?, via = ?, civico = ?, citta = ?, provincia = ? "
+				+ " cap = ?, ruolo = ?, username = ?, password = ? " + " WHERE id = ?";
+		PreparedStatement ps = null;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, utente.getNome());
+			ps.setString(2, utente.getCognome());
+			ps.setString(3, utente.getEmail());
+			ps.setString(4, utente.getTelefono());
+			ps.setString(5, utente.getVia());
+			ps.setString(6, utente.getCivico());
+			ps.setString(7, utente.getCitta());
+			ps.setString(8, utente.getProvincia());
+			ps.setString(9, utente.getCap());
+			ps.setString(10, utente.getRuolo());
+			ps.setString(11, utente.getUsername());
+			ps.setString(12, utente.getPassword());
+			ps.setInt(13, id);
+			ps.executeUpdate();
+			System.out.println("Modifica eseguita");
+		} catch (SQLException e) {
+			throw new Eccezione(e.getMessage());
+		}
 	}
 }
