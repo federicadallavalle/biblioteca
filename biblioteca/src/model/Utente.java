@@ -8,7 +8,7 @@ public class Utente {
 	private String cognome;
 	private String email;
 	private String via;
-	private String numCivico;
+	private String civico;
 	private String citta;
 	private String provincia;
 	private String cap;
@@ -25,7 +25,7 @@ public class Utente {
 		this.cognome = cognome;
 		this.email = email;
 		this.via = via;
-		this.numCivico = numCivico;
+		this.civico = numCivico;
 		this.citta = citta;
 		this.provincia = provincia;
 		this.cap = cap;
@@ -63,8 +63,8 @@ public class Utente {
 		return via;
 	}
 
-	public String getNumCivico() {
-		return numCivico;
+	public String getCivico() {
+		return civico;
 	}
 
 	public String getCitta() {
@@ -103,8 +103,8 @@ public class Utente {
 		this.via = via;
 	}
 
-	public void setNumCivico(String numCivico) {
-		this.numCivico = numCivico;
+	public void setCivico(String numCivico) {
+		this.civico = numCivico;
 	}
 
 	public void setCitta(String citta) {
@@ -154,7 +154,7 @@ public class Utente {
 	@Override
 	public String toString() {
 		return "Utente [nome=" + nome + ", cognome=" + cognome + ", email=" + email + ", via=" + via + ", numCivico="
-				+ numCivico + ", citta=" + citta + ", provincia=" + provincia + ", cap=" + cap + ", telefono="
+				+ civico + ", citta=" + citta + ", provincia=" + provincia + ", cap=" + cap + ", telefono="
 				+ telefono + ", ruolo=" + ruolo + ", username=" + username + ", password=" + password + ", prestiti="
 				+ prestiti + "]";
 	}
