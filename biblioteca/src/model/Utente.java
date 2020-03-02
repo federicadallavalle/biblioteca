@@ -1,7 +1,8 @@
 package model;
 
-public class Utente {
+import java.util.List;
 
+public class Utente {
 	private String nome;
 	private String cognome;
 	private String email;
@@ -14,13 +15,11 @@ public class Utente {
 	private String ruolo;
 	private String username;
 	private String password;
-	
-	
-	
-	
+	private List<Prestito> prestiti;
+
 	public Utente(String nome, String cognome, String email, String via, String numCivico, String citta,
-			String provincia, String cap, String telefono, String ruolo, String username, String password) {
-		super();
+			String provincia, String cap, String telefono, String ruolo, String username, String password,
+			List<Prestito> prestiti) {
 		this.nome = nome;
 		this.cognome = cognome;
 		this.email = email;
@@ -33,105 +32,122 @@ public class Utente {
 		this.ruolo = ruolo;
 		this.username = username;
 		this.password = password;
+		this.prestiti = prestiti;
 	}
-
 
 	public Utente() {
-		super();
 	}
-
 
 	public String getNome() {
 		return nome;
 	}
+
 	public String getCognome() {
 		return cognome;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public String getVia() {
 		return via;
 	}
+
 	public String getNumCivico() {
 		return numCivico;
 	}
+
 	public String getCitta() {
 		return citta;
 	}
+
 	public String getProvincia() {
 		return provincia;
 	}
+
 	public String getCap() {
 		return cap;
 	}
+
 	public String getTelefono() {
 		return telefono;
 	}
+
 	public String getRuolo() {
 		return ruolo;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 	public void setCognome(String cognome) {
 		this.cognome = cognome;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	public void setVia(String via) {
 		this.via = via;
 	}
+
 	public void setNumCivico(String numCivico) {
 		this.numCivico = numCivico;
 	}
+
 	public void setCitta(String citta) {
 		this.citta = citta;
 	}
+
 	public void setProvincia(String provincia) {
 		this.provincia = provincia;
 	}
+
 	public void setCap(String cap) {
 		this.cap = cap;
 	}
+
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
+
 	public void setRuolo(String ruolo) {
 		this.ruolo = ruolo;
 	}
 
-	
-	public String getCodiceUtente() {
+	public String getUsername() {
 		return username;
 	}
 
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
 	public String getPassword() {
 		return password;
 	}
 
-
-	public void setCodiceUtente(String username) {
-		this.username = username;
-	}
-
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
+	public List<Prestito> getPrestiti() {
+		return prestiti;
+	}
+
+	public void setPrestiti(List<Prestito> prestiti) {
+		this.prestiti = prestiti;
+	}
 
 	@Override
 	public String toString() {
 		return "Utente [nome=" + nome + ", cognome=" + cognome + ", email=" + email + ", via=" + via + ", numCivico="
 				+ numCivico + ", citta=" + citta + ", provincia=" + provincia + ", cap=" + cap + ", telefono="
-				+ telefono + ", ruolo=" + ruolo + ", codiceUtente=" + username + ", password=" + password + "]";
+				+ telefono + ", ruolo=" + ruolo + ", username=" + username + ", password=" + password + ", prestiti="
+				+ prestiti + "]";
 	}
 
-
-	
-	
 }
-
