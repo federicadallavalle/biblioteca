@@ -7,19 +7,20 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
+import utilities.Eccezione;
 
 public class DataBase {
 	private static Properties p = new Properties();
 	
-	public static Connection getConnection() throws SQLException {
+	public static Connection getConnection() throws Eccezione{
 		FileReader reader = null;	
 		try {
 			reader = new FileReader("conf.properties");
 			p.load(reader);
 		} catch (FileNotFoundException e) {
-			System.out.println("File conf.properties non trovato");
+			throw new Eccezione("File conf.properties non trovato");
 		} catch (IOException e) {
-			System.out.println(e.getMessage());
+			throw new Eccezione(e.getMessage());
 		}
 		
 		String user = p.getProperty("user");
@@ -31,7 +32,12 @@ public class DataBase {
 
 		String url = "jdbc:" + jdbc + "://" + indirizzo + ":" + porta + "/" + db + "?serverTimezone=Europe/Rome";
 
-		Connection conn = DriverManager.getConnection(url, user, password);
+		Connection conn = null;
+		try {
+			conn = DriverManager.getConnection(url, user, password);
+		} catch (SQLException e) {
+			throw new Eccezione(e.getMessage());
+		}
 
 		return conn;
 	}

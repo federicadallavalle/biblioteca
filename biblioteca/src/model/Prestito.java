@@ -7,21 +7,36 @@ public class Prestito {
 	private LocalDate dataInizio;
 	private LocalDate dataConsegna;
 	private LocalDate dataUltimoSollecito;
+	private Utente utente;
+	private Libro libro;
 
 	public Prestito() {
 	}
 
-	public Prestito(Long id, LocalDate dataInizio, LocalDate dataConsegna, LocalDate dataUltimoSollecito) {
+	public Prestito(Long id, LocalDate dataInizio, LocalDate dataConsegna, LocalDate dataUltimoSollecito, Utente utente,
+			Libro libro) {
 		this.id = id;
 		this.dataInizio = dataInizio;
 		this.dataConsegna = dataConsegna;
 		this.dataUltimoSollecito = dataUltimoSollecito;
+		this.utente = utente;
+		this.libro = libro;
 	}
 
-	public Prestito(LocalDate dataInizio, LocalDate dataConsegna, LocalDate dataUltimoSollecito) {
-		this.dataInizio = dataInizio;
-		this.dataConsegna = dataConsegna;
-		this.dataUltimoSollecito = dataUltimoSollecito;
+	public Utente getUtente() {
+		return utente;
+	}
+
+	public void setUtente(Utente utente) {
+		this.utente = utente;
+	}
+
+	public Libro getLibro() {
+		return libro;
+	}
+
+	public void setLibro(Libro libro) {
+		this.libro = libro;
 	}
 
 	public Long getId() {

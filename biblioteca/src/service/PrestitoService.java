@@ -1,5 +1,7 @@
 package service;
 
-public interface PrestitoService {
+import model.Prestito;
 
+public interface PrestitoService {
+	void createPrestito(Prestito p);
 }
