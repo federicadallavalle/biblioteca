@@ -9,10 +9,11 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public class DataBase {
-
+	private static Properties p = new Properties();
+	
 	public static Connection getConnection() throws SQLException {
 		FileReader reader = null;
-		Properties p = new Properties();
+		
 		try {
 			reader = new FileReader("conf.properties");
 			p.load(reader);
