@@ -3,6 +3,7 @@ package model;
 import java.util.List;
 
 public class Utente {
+	private Long id;
 	private String nome;
 	private String cognome;
 	private String email;
@@ -33,6 +34,14 @@ public class Utente {
 		this.username = username;
 		this.password = password;
 		this.prestiti = prestiti;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public Utente() {
