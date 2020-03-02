@@ -103,5 +103,17 @@ public class LibroDao {
 		Connection conn = getConnection();
 		String sql = "DELETE FROM prestito WHERE fkIdLibro = ?";
 		PreparedStatement ps = null;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setLong(1, id);
+			ps.executeUpdate();
+			sql = "DELETE FROM libro WHERE id = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setLong(1, id);
+			ps.executeUpdate();
+		}catch (SQLException e) {
+			throw new Eccezione(e.getMessage());
+		}
 	}
 }
