@@ -12,8 +12,7 @@ public class DataBase {
 	private static Properties p = new Properties();
 	
 	public static Connection getConnection() throws SQLException {
-		FileReader reader = null;
-		
+		FileReader reader = null;	
 		try {
 			reader = new FileReader("conf.properties");
 			p.load(reader);
