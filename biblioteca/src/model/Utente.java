@@ -12,14 +12,14 @@ public class Utente {
 	private String cap;
 	private String telefono;
 	private String ruolo;
-	private String codiceUtente;
+	private String username;
 	private String password;
 	
 	
 	
 	
 	public Utente(String nome, String cognome, String email, String via, String numCivico, String citta,
-			String provincia, String cap, String telefono, String ruolo, String codiceUtente, String password) {
+			String provincia, String cap, String telefono, String ruolo, String username, String password) {
 		super();
 		this.nome = nome;
 		this.cognome = cognome;
@@ -31,7 +31,7 @@ public class Utente {
 		this.cap = cap;
 		this.telefono = telefono;
 		this.ruolo = ruolo;
-		this.codiceUtente = codiceUtente;
+		this.username = username;
 		this.password = password;
 	}
 
@@ -104,7 +104,7 @@ public class Utente {
 
 	
 	public String getCodiceUtente() {
-		return codiceUtente;
+		return username;
 	}
 
 
@@ -113,8 +113,8 @@ public class Utente {
 	}
 
 
-	public void setCodiceUtente(String codiceUtente) {
-		this.codiceUtente = codiceUtente;
+	public void setCodiceUtente(String username) {
+		this.username = username;
 	}
 
 
@@ -127,7 +127,7 @@ public class Utente {
 	public String toString() {
 		return "Utente [nome=" + nome + ", cognome=" + cognome + ", email=" + email + ", via=" + via + ", numCivico="
 				+ numCivico + ", citta=" + citta + ", provincia=" + provincia + ", cap=" + cap + ", telefono="
-				+ telefono + ", ruolo=" + ruolo + ", codiceUtente=" + codiceUtente + ", password=" + password + "]";
+				+ telefono + ", ruolo=" + ruolo + ", codiceUtente=" + username + ", password=" + password + "]";
 	}
 
 
