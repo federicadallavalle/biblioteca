@@ -28,11 +28,19 @@ public class UtenteDao {
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				Utente utente = new Utente();
+				utente.setId(rs.getLong("id"));
 				utente.setNome(rs.getString("nome"));
 				utente.setCognome(rs.getString("cognome"));
 				utente.setEmail(rs.getString("email"));
+				utente.setTelefono(rs.getString("telefono"));
+				utente.setVia(rs.getString("via"));
+				utente.setCivico(rs.getString("civico"));
+				utente.setCitta(rs.getString("citta"));
+				utente.setProvincia(rs.getString("provincia"));
+				utente.setCap(rs.getString("cap"));
 				utente.setRuolo(rs.getString("ruolo"));
 				utente.setUsername(rs.getString("username"));
+				utente.setPassword(rs.getString("password"));
 				lista.add(utente);
 			}
 			ps.close();
