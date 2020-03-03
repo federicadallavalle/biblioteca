@@ -19,7 +19,7 @@ public class LibroDao {
 	 * @return Una lista di libri
 	 * @throws Eccezione gestisce eccezione SQLException
 	 */
-	public static List<Libro> lista(String key) throws Eccezione {
+	public static List<Libro> findAllLibro(String key) throws Eccezione {
 		List<Libro> lista = new ArrayList<>();
 		try {
 			Connection conn = getConnection();
@@ -51,7 +51,7 @@ public class LibroDao {
 		return lista;
 	}
 
-	public static void nuovo(Libro libro) throws Eccezione {
+	public static void createLibro(Libro libro) throws Eccezione {
 		Connection conn = getConnection();
 		String sql = "INSERT INTO libro (titolo, autore, editore, isbn, quantita, scaffale, corsia, libreria) VALUES (?,?,?,?,?,?,?,?)";
 		PreparedStatement ps = null;
@@ -71,7 +71,7 @@ public class LibroDao {
 		}
 	}
 
-	public static void modifica(Libro libro, Long id) throws Eccezione {
+	public static void updateLibro(Libro libro, Long id) throws Eccezione {
 		Connection conn = getConnection();
 		String sql = "SELECT COUNT(id) AS libriInPrestito FROM prestito WHERE fkIdLibro = ? AND dataConsegna IS NULL";
 		PreparedStatement ps = null;
@@ -99,7 +99,7 @@ public class LibroDao {
 		}
 	}
 	
-	public static void elimina(Long id) throws Eccezione {
+	public static void deleteLibro(Long id) throws Eccezione {
 		Connection conn = getConnection();
 		String sql = "DELETE FROM prestito WHERE fkIdLibro = ?";
 		PreparedStatement ps = null;
