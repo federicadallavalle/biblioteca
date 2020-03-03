@@ -35,9 +35,12 @@ public class Servlet extends HttpServlet {
 			break;
 		case "delete-prestito":
 			break;
+		case "login":
+			pagina = "login";
+			break;
 		}
 		sc = getServletContext();
-		rd = sc.getRequestDispatcher(pagina);
+		rd = sc.getRequestDispatcher("/" + pagina + ".jsp");
 		rd.forward(request, response);
 	}
 
