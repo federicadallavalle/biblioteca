@@ -12,6 +12,7 @@ public interface PrestitoService {
 
 	void deletePrestito(Long idPrestito) throws Eccezione;
 
-	List<Prestito> searchPrestito() throws Eccezione;
+	List<Prestito> searchPrestitoByUtente(Long idUtente) throws Eccezione;
 
+	List<Prestito> searchPrestitoByLibro(Long idLibro) throws Eccezione;
 }
