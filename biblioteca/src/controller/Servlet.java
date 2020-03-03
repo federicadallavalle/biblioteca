@@ -36,6 +36,9 @@ public class Servlet extends HttpServlet {
 		case "delete-prestito":
 			break;
 		case "login":
+			String user = request.getParameter("username");
+			String password = request.getParameter("password");
+			LoginServiceImpl
 			pagina = "login";
 			break;
 		}
