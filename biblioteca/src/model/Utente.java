@@ -36,15 +36,23 @@ public class Utente {
 		this.prestiti = prestiti;
 	}
 
+	public Utente() {
+	}
+	
+	public Utente(String nome, String cognome, String email, String ruolo, String username) {
+		this.nome = nome;
+		this.cognome = cognome;
+		this.email = email;
+		this.ruolo = ruolo;
+		this.username = username;
+	}
+
 	public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Utente() {
 	}
 
 	public String getNome() {
