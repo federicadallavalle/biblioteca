@@ -1,5 +1,5 @@
 package utilities;
-//deho
+
 public class RandomPassword { 
 		  
 	    // genera una password random di lunghezza n 

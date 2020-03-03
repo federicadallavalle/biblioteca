@@ -55,7 +55,7 @@ public class LoginServiceImpl implements LoginService {
 		}
 		return pagina;
 	}
-
+	
 	public void passwordDimenticata(HttpServletRequest request, Utente utente) throws Eccezione {
 		int lunghezzaPassword = 7;
 		// recupero l'indirizzo email dell'utente nel campo di input

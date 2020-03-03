@@ -17,12 +17,13 @@ import utilities.Eccezione;
 @WebServlet("*.do")
 public class Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	Utente utente;
 
 	public Servlet() {
 		super();
 	}
 	
-
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
@@ -32,18 +33,23 @@ public class Servlet extends HttpServlet {
 		String path = request.getServletPath();
 		String comando = path.substring(1, path.lastIndexOf(".do"));
 		switch (comando) {
+		
 		case "create-prestito":
 			break;
+		
 		case "update-prestito":
 			break;
+		
 		case "search-prestito":
 			break;
+		
 		case "delete-prestito":
 			break;
+		
 		case "login":
 			String user = request.getParameter("username");
 			String password = request.getParameter("password");
-			Utente utente = new Utente("", "", "", "", user);
+			utente = new Utente("", "", "", "", user);
 			try {
 				pagina = LoginServiceImpl.getIstance().login(request, utente, password);
 			} catch (Eccezione e) {
@@ -51,10 +57,22 @@ public class Servlet extends HttpServlet {
 				pagina = "login";
 			}
 			break;
+		
+		case "password-dimenticata":
+			String email = request.getParameter("email");
+			utente = new Utente ("","",email,"","");
+			try {
+				pagina = LoginServiceImpl.getIstance().login(request, utente, email);
+			} catch (Eccezione e) {
+				System.out.println("Indirizzo Email non valido: " + e.getMessage());
+				pagina = "password-dimenticata";
 		}
 		sc = getServletContext();
 		rd = sc.getRequestDispatcher("/" + pagina + ".jsp");
 		rd.forward(request, response);
+		break;
+		
+		}
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
