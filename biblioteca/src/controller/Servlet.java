@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Utente;
+import serviceimpl.LoginServiceImpl;
+import utilities.Eccezione;
+
 @WebServlet("*.do")
 public class Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -17,6 +21,7 @@ public class Servlet extends HttpServlet {
 	public Servlet() {
 		super();
 	}
+	
 
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -38,8 +43,13 @@ public class Servlet extends HttpServlet {
 		case "login":
 			String user = request.getParameter("username");
 			String password = request.getParameter("password");
-			LoginServiceImpl
-			pagina = "login";
+			Utente utente = new Utente("", "", "", "", user);
+			try {
+				pagina = LoginServiceImpl.getIstance().login(request, utente, password);
+			} catch (Eccezione e) {
+				System.out.println("Utente non trovato: " + e.getMessage());
+				pagina = "login";
+			}
 			break;
 		}
 		sc = getServletContext();

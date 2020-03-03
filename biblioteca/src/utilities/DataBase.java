@@ -1,4 +1,4 @@
-package model.dao;
+package utilities;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -7,7 +7,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
-import utilities.Eccezione;
 
 public class DataBase {
 	private static Properties p = new Properties();

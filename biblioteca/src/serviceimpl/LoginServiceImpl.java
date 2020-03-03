@@ -1,7 +1,11 @@
 package serviceimpl;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
+import model.Utente;
+import model.dao.UtenteDao;
 import service.LoginService;
 import utilities.Eccezione;
 import utilities.RandomPassword;
@@ -20,12 +24,36 @@ public class LoginServiceImpl implements LoginService {
 	}
 
 	@Override
-	public void login(HttpServletRequest request, String username, String password) throws Eccezione {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
+	public String login(HttpServletRequest request, Utente utente, String password) throws Eccezione {
+		String pagina = "";
+		// cerca l'utente tramite username e password (recupera una lista di lunghezza 1
+		// in quanto l'username � univoco)
+		List<Utente> lista = UtenteDao.cercaUtente(utente);
+		Utente utenteTrovato = lista.get(0);
+		// se la password dell'utente non corrisponde alla password inserita lancia un
+		// eccezione
+		if (utenteTrovato.getPassword() != password) {
+			throw new Eccezione("Password errata");
+		}
+		System.out.println("Accesso eseguito");
+		// ora controlla il ruolo dell'utente che effettua l'accesso
+		switch (utenteTrovato.getRuolo()) {
+		case "iscritto": {
+			pagina = "home-pubblica";
+			break;
+		}
+		case "gestore": {
+			pagina = "home-privata";
+			break;
+		}
+		case "amministratore": {
+			pagina = "home-privata";
+			break;
+		}
+		default:
+			throw new IllegalArgumentException("Unexpected value: " + utenteTrovato.getRuolo());
+		}
+		return pagina;
 	public void passwordDimenticata(HttpServletRequest request, String email) throws Eccezione {
 		int lunghezzaPassword = 7;
 		// recupero l'indirizzo email dell'utente nel campo di input
@@ -35,9 +63,12 @@ public class LoginServiceImpl implements LoginService {
 	}
 
 	@Override
-	public void nuovaPassword(HttpServletRequest request, String email, String password) {
+	public void passwordDimenticata(HttpServletRequest request, Utente utente) throws Eccezione {
 		// TODO Auto-generated method stub
+		
+	}
 
+		
 	}
 
 }

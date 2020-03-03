@@ -9,6 +9,17 @@ import utilities.Eccezione;
 
 public class UtenteServiceImpl implements UtenteService {
 
+	private static UtenteServiceImpl istanza = null;
+	
+	private UtenteServiceImpl() {}
+	
+	public static UtenteServiceImpl getIstance() {
+		if(istanza == null) {
+			istanza = new UtenteServiceImpl();
+		} 
+		return istanza;
+	}
+	
 	@Override
 	public void createUtente(Utente u) throws Eccezione {
 		UtenteDao.cercaUtente(u);
@@ -28,6 +39,4 @@ public class UtenteServiceImpl implements UtenteService {
 	public List<Utente> searchUtente(Utente u) throws Eccezione {
 		return UtenteDao.cercaUtente(u);
 	}
-
-	
 }

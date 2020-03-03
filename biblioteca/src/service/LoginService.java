@@ -4,14 +4,15 @@ package service;
 import javax.servlet.http.HttpServletRequest;
 
 import model.Prestito;
+import model.Utente;
 import utilities.Eccezione;
 
 public interface LoginService {
 
-	void login(HttpServletRequest request, String username, String password) throws Eccezione;
+	String login(HttpServletRequest request, Utente utente, String password) throws Eccezione;
 
-	void passwordDimenticata(HttpServletRequest request, String email) throws Eccezione;
+	void passwordDimenticata(HttpServletRequest request, Utente utente) throws Eccezione;
 
-	void nuovaPassword(HttpServletRequest request, String email, String password);
+	void nuovaPassword(HttpServletRequest request, Utente utente);
 
 }
