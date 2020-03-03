@@ -54,21 +54,20 @@ public class LoginServiceImpl implements LoginService {
 			throw new IllegalArgumentException("Unexpected value: " + utenteTrovato.getRuolo());
 		}
 		return pagina;
-	public void passwordDimenticata(HttpServletRequest request, String email) throws Eccezione {
+	}
+
+	public void passwordDimenticata(HttpServletRequest request, Utente utente) throws Eccezione {
 		int lunghezzaPassword = 7;
 		// recupero l'indirizzo email dell'utente nel campo di input
-		// genero la password e la inserisco nel documento da inviare all'indirizzo email dell'utente
+		// genero la password e la inserisco nel documento da inviare all'indirizzo
+		// email dell'utente
 		String nuovaPassword = RandomPassword.getPassword(lunghezzaPassword);
-		// inserisco all'interno del documento anche il link che reindirizza alla pagina di nuova password
+		// inserisco all'interno del documento anche il link che reindirizza alla pagina
+		// di nuova password
 	}
 
 	@Override
-	public void passwordDimenticata(HttpServletRequest request, Utente utente) throws Eccezione {
+	public void nuovaPassword(HttpServletRequest request, Utente utente) {
 		// TODO Auto-generated method stub
-		
 	}
-
-		
-	}
-
 }
