@@ -8,7 +8,7 @@ import utilities.Eccezione;
 public interface UtenteService {
 	void createUtente(Utente u) throws Eccezione;
 
-	void updateUtente(Utente u) throws Eccezione;
+	void updateUtente(Utente u, Long id) throws Eccezione;
 
 	void deleteUtente(Long idUtente) throws Eccezione;
 

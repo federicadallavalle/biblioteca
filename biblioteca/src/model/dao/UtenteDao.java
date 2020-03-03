@@ -15,8 +15,9 @@ public class UtenteDao {
 	public static List<Utente> cercaUtente(Utente ut) throws Eccezione {
 		ArrayList<Utente> lista = new ArrayList<>();
 		Connection conn = getConnection();
-		String sql = "SELECT * FROM biblioteca.utente " + "WHERE nome LIKE '%?%', cognome LIKE '%?%', email LIKE '%?%',"
-				+ "ruolo LIKE '%?%', username LIKE '%?%'";
+		String sql = "SELECT * FROM biblioteca.utente " 
+				+ "WHERE nome LIKE '%?%', cognome LIKE '%?%', email LIKE '%?%'"
+				+ ", ruolo LIKE '%?%', username LIKE '%?%'";
 		PreparedStatement ps = null;
 		try {
 			ps = conn.prepareStatement(sql);
@@ -78,13 +79,13 @@ public class UtenteDao {
 		}
 	}
 
-	public static void eliminaUtente(int id) throws Eccezione {
+	public static void eliminaUtente(Long id) throws Eccezione {
 		Connection conn = getConnection();
 		String sql = "DELETE FROM biblioteca.utente WHERE id = ?";
 		PreparedStatement ps = null;
 		try {
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, id);
+			ps.setLong(1, id);
 			ps.executeUpdate();
 			System.out.println("Cancellazione eseguita");
 		} catch (SQLException e) {
@@ -92,11 +93,12 @@ public class UtenteDao {
 		}
 	}
 
-	public static void modifica(Utente utente, int id) throws Eccezione {
+	public static void modificaUtente(Utente utente, Long id) throws Eccezione {
 		Connection conn = getConnection();
 		String sql = "UPDATE biblioteca.utente "
-				+ " SET nome = ?, cognome = ?, email = ?, telefono = ?, via = ?, civico = ?, citta = ?, provincia = ? "
-				+ " cap = ?, ruolo = ?, username = ?, password = ? " + " WHERE id = ?";
+				+ "SET nome = ?, cognome = ?, email = ?, telefono = ?, via = ?, civico = ?, citta = ?"
+				+ ", provincia = ? , cap = ?, ruolo = ?, username = ?, password = ? "
+				+ "WHERE id = ?";
 		PreparedStatement ps = null;
 		try {
 			ps = conn.prepareStatement(sql);
@@ -112,7 +114,7 @@ public class UtenteDao {
 			ps.setString(10, utente.getRuolo());
 			ps.setString(11, utente.getUsername());
 			ps.setString(12, utente.getPassword());
-			ps.setInt(13, id);
+			ps.setLong(13, id);
 			ps.executeUpdate();
 			System.out.println("Modifica eseguita");
 		} catch (SQLException e) {
