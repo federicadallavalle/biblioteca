@@ -7,6 +7,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,6 +82,44 @@ public class PrestitoDao {
 				libro.setId(rs.getLong("fkIdLibro"));
 				p.setLibro(libro);
 				lista.add(p);
+			}
+		} catch (SQLException e) {
+			throw new Eccezione(e.getMessage());
+		} finally {
+			try {
+				ps.close();
+				conn.close();
+			} catch (SQLException e) {
+				throw new Eccezione(e.getMessage());
+			}
+		}
+		return lista;
+	}
+	
+	public static List<Long> listaIdUtentiScadenze() throws Eccezione {
+		String sql = "SELECT fkIdUtente FROM biblioteca.prestito "
+				+"WHERE dataInizio < ?";
+		Connection conn = DataBase.getConnection();
+		PreparedStatement ps;
+		ArrayList<Long> lista = new ArrayList<>();
+		try {
+			ps = conn.prepareStatement(sql);
+		} catch (SQLException e) {
+			try {
+				conn.close();
+			} catch (SQLException e1) {
+				throw new Eccezione(e1.getMessage());
+			}
+			throw new Eccezione(e.getMessage());
+		}
+		try {
+			LocalDate localDate = LocalDate.now();
+			localDate.plusDays(-30);
+			Date data = Date.valueOf(localDate);
+			ps.setDate(1, data);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				lista.add(rs.getLong("id"));
 			}
 		} catch (SQLException e) {
 			throw new Eccezione(e.getMessage());
