@@ -24,7 +24,9 @@
 </form> 
 </div>
 <br>
-   
+   <a href="registrazione-utente.jsp" > Iscrivi nuovo utente </a>
+    <br>
+    <br>
 <div>
 <table border="1">
 <tr>
