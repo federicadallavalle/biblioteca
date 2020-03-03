@@ -11,6 +11,8 @@ public class Prestito {
 	private Libro libro;
 
 	public Prestito() {
+		utente = new Utente();
+		libro = new Libro();
 	}
 
 	public Prestito(Long id, LocalDate dataInizio, LocalDate dataConsegna, LocalDate dataUltimoSollecito, Utente utente,

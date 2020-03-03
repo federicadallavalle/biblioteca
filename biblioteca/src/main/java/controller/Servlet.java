@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -10,20 +11,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Prestito;
 import model.Utente;
 import serviceimpl.LoginServiceImpl;
+import serviceimpl.PrestitoServiceImpl;
 import utilities.Eccezione;
 
 @WebServlet("*.do")
 public class Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	Utente utente;
 
 	public Servlet() {
 		super();
 	}
-	
+
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
@@ -33,19 +36,27 @@ public class Servlet extends HttpServlet {
 		String path = request.getServletPath();
 		String comando = path.substring(1, path.lastIndexOf(".do"));
 		switch (comando) {
-		
+
 		case "create-prestito":
+			Prestito p = new Prestito();
+			p.setDataInizio(LocalDate.now());
+			p.getUtente().setId(Long.valueOf(request.getParameter("idUtente")));
+			p.getLibro().setId(Long.valueOf(request.getParameter("idLibro")));
+			try {
+				PrestitoServiceImpl.getInstance().createPrestito(p);
+			} catch (Eccezione e1) {
+				System.out.println(e1.getMessage());
+			}
 			break;
-		
 		case "update-prestito":
 			break;
-		
+
 		case "search-prestito":
 			break;
-		
+
 		case "delete-prestito":
 			break;
-		
+
 		case "login":
 			String user = request.getParameter("username");
 			String password = request.getParameter("password");
@@ -57,21 +68,21 @@ public class Servlet extends HttpServlet {
 				pagina = "login";
 			}
 			break;
-		
+
 		case "password-dimenticata":
 			String email = request.getParameter("email");
-			utente = new Utente ("","",email,"","");
+			utente = new Utente("", "", email, "", "");
 			try {
 				pagina = LoginServiceImpl.getIstance().login(request, utente, email);
 			} catch (Eccezione e) {
 				System.out.println("Indirizzo Email non valido: " + e.getMessage());
 				pagina = "password-dimenticata";
-		}
-		sc = getServletContext();
-		rd = sc.getRequestDispatcher("/" + pagina + ".jsp");
-		rd.forward(request, response);
-		break;
-		
+			}
+			sc = getServletContext();
+			rd = sc.getRequestDispatcher("/" + pagina + ".jsp");
+			rd.forward(request, response);
+			break;
+
 		}
 	}
 
