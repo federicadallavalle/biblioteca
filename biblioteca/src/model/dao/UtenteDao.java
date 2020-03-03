@@ -23,7 +23,9 @@ public class UtenteDao {
 	 */
 	public static List<Utente> cercaUtente(Utente ut) throws Eccezione {
 		ArrayList<Utente> lista = new ArrayList<>();
+//		Connessione al db
 		Connection conn = getConnection();
+//		Estrazione degli utenti ricercando per nome, cognome, email, ruolo, username
 		String sql = "SELECT * FROM biblioteca.utente " 
 				+ "WHERE nome LIKE '%?%', cognome LIKE '%?%', email LIKE '%?%'"
 				+ ", ruolo LIKE '%?%', username LIKE '%?%'";

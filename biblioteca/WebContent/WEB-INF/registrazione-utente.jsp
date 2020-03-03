@@ -6,6 +6,14 @@
 <title>Registrazione Utente</title>
 </head>
 <body>
+<!--  Pagina web per l'inserimento dell'utente
+		campi gestiti:	nome, cognome, email, via, civico, città, provincia, cap, telefono, ruolo
+		
+		Il campo ruolo visualizza la selezione iscritto per gli utenti che possono accedere alla pagina
+		mentre visualizza le selezioni gestore e amministratore solamente per gli utenti amministratore
+		
+		Il pulsante aggiungi inserisce l'utente mentre il pulsante annulla ripulisce i campi della pagina
+-->
 	<h1>Registrazione Utente</h1>
 	<br>
 	<div style="display: flex;">
