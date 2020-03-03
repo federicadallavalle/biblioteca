@@ -49,12 +49,30 @@ public class Servlet extends HttpServlet {
 			}
 			break;
 		case "update-prestito":
+			p = new Prestito();
+			p.setId(Long.parseLong(request.getParameter("idPrestito")));
+			p.setDataInizio(LocalDate.now());
+			p.setDataConsegna(LocalDate.now());
+			p.setDataUltimoSollecito(LocalDate.now());
+			p.getUtente().setId(Long.valueOf(request.getParameter("idUtente")));
+			p.getLibro().setId(Long.valueOf(request.getParameter("idLibro")));
+			try {
+				PrestitoServiceImpl.getInstance().updatePrestito(p);
+			} catch (Eccezione e1) {
+				System.out.println(e1.getMessage());
+			}
 			break;
 
 		case "search-prestito":
 			break;
 
 		case "delete-prestito":
+			Long idPrestito = Long.parseLong(request.getParameter("idPrestito"));
+			try {
+				PrestitoServiceImpl.getInstance().deletePrestito(idPrestito);
+			} catch (Eccezione e1) {
+				System.out.println(e1.getMessage());
+			}
 			break;
 
 		case "login":
