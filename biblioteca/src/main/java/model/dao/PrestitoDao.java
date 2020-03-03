@@ -19,7 +19,11 @@ import utilities.Eccezione;
 
 // TODO da commentare ogni metodo
 public class PrestitoDao {
-
+/**
+ * creazione prestito 
+ * @param p prende e setta la dataInizio e le fk di Utente e Libro
+ * @throws Eccezione raccoglie le eccezioni di qualunque tipo
+ */
 	public static void createPrestito(Prestito p) throws Eccezione {
 		String sql = "INSERT INTO biblioteca.prestito (dataInizio, fkIdUtente, fkIdLibro) VALUES (?, ?, ?)";
 		Connection conn = DataBase.getConnection();
@@ -50,7 +54,11 @@ public class PrestitoDao {
 			}
 		}
 	}
-
+    /**
+     * ricerca tutti i prestiti 
+     * @return una lista che conterrà tutti i prestiti
+     * @throws Eccezione raccoglie le eccezioni di qualunque tipo
+     */
 	public static List<Prestito> findAllPrestito() throws Eccezione {
 		String sql = "SELECT * FROM biblioteca.prestito";
 		Connection conn = DataBase.getConnection();
@@ -140,7 +148,11 @@ public class PrestitoDao {
 		}
 		return lista;
 	}
-
+	/**
+	 * aggiornamento di un prestito, verrà aggiunta anche la dataConsegna e la dataUltimoSollecito
+	 * @param p prende e setta tutti gli attributi di Prestiti
+	 * @throws Eccezione raccoglie le eccezioni di qualunque tipo
+	 */
 	public static void updatePrestito(Prestito p) throws Eccezione {
 		String sql = "UPDATE biblioteca.prestito SET "
 				+ "dataInizio = ?, dataConsegna = ?, dataUltimoSollecito = ?, fkIdUtente = ?, fkIdLibro = ? "
@@ -176,7 +188,11 @@ public class PrestitoDao {
 			}
 		}
 	}
-
+	/**
+	 * cancellazione di un prestito
+	 * @param idPrestito della riga Prestito che verrà cancellata
+	 * @throws Eccezione raccoglie le eccezioni di qualunque tipo
+	 */
 	public static void deletePrestito(Long idPrestito) throws Eccezione {
 		String sql = "DELETE FROM biblioteca.prestito WHERE id = ?";
 		Connection conn = DataBase.getConnection();
@@ -219,7 +235,12 @@ public class PrestitoDao {
 			throw new Eccezione(e.getMessage());
 		}
 	}
-
+ /**
+  * ricerca del prestito dall'id
+  * @param id ovvero quello ricercato
+  * @return tutta la riga di quell'id  
+  * @throws Eccezione raccoglie le eccezioni di qualunque tipo
+  */
 	public static Prestito findPrestitoById(Long id) throws Eccezione {
 		String sql = "SELECT * FROM biblioteca.prestito WHERE id = ?";
 		Connection conn = DataBase.getConnection();
@@ -263,7 +284,12 @@ public class PrestitoDao {
 		return p;
 
 	}
-
+	/**
+	 * ricerca della riga prestito dall'idUtente
+	 * @param idUtente ovvero quello ricercato 
+	 * @return lista che conterrà tutti i prestiti del singolo utente ricercato
+	 * @throws Eccezione raccoglie le eccezioni di qualunque tipo
+	 */
 	public static List<Prestito> findByUtenteId(Long idUtente) throws Eccezione {
 		String sql = "SELECT * FROM biblioteca.prestito WHERE  fkIdUtente = ?";
 		Connection conn = DataBase.getConnection();
@@ -309,7 +335,12 @@ public class PrestitoDao {
 		}
 		return lista;
 	}
-
+	/**
+	 * ricerca del prestito tramite l'idLibro
+	 * @param idLibro ovvero quello ricercato
+	 * @return lista dei prestiti collegati al libro ricercato( di un libro possiamo avere più copie )
+	 * @throws Eccezione raccoglie le eccezioni di qualunque tipo
+	 */
 	public static List<Prestito> findByLibroId(Long idLibro) throws Eccezione{
 		String sql = "SELECT * FROM biblioteca.prestito WHERE  fkIdLibro = ?";
 		Connection conn = DataBase.getConnection();

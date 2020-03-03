@@ -22,7 +22,7 @@ public class PrestitoServiceImpl implements PrestitoService {
 	public void createPrestito(Prestito p) throws Eccezione {
 		PrestitoDao.createPrestito(p);
 	}
-
+	
 	@Override
 	public void updatePrestito(Prestito p) throws Eccezione {
 		PrestitoDao.updatePrestito(p);
