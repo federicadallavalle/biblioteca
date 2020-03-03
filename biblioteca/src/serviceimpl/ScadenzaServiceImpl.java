@@ -5,6 +5,7 @@ import java.util.List;
 
 import model.Utente;
 import model.dao.PrestitoDao;
+import model.dao.UtenteDao;
 import service.ScadenzaService;
 
 public class ScadenzaServiceImpl implements ScadenzaService{
@@ -20,11 +21,11 @@ public class ScadenzaServiceImpl implements ScadenzaService{
 
 	@Override
 	public List<Utente> listaUtentiScadenze() {
-		List<Integer> idUtentiScadenze = PrestitoDao.listaIdUtentiScadenze();
+		List<Long> idUtentiScadenze = PrestitoDao.listaIdUtentiScadenze();
 		List<Utente> utenti = new ArrayList<>();
-		for(Integer id: idUtentiScadenze) {
+		for(Long id: idUtentiScadenze) {
 			utenti.add(UtenteDao.cercaUtentePerId(id));
 		}
-		return utente;
+		return utenti;
 	}	
 }
