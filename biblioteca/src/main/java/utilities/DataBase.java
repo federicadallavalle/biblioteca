@@ -15,6 +15,8 @@ public class DataBase {
 		FileReader reader = null;	
 		try {
 			reader = new FileReader("C:\\Users\\115894\\eclipse-workspace\\biblioteca\\conf.properties");
+			// pc saccone reader = new FileReader("C:\\Users\\HP-CND9444HNV\\Desktop\\biblioteca\\biblioteca\\conf.properties");
+			
 			p.load(reader);
 		} catch (FileNotFoundException e) {
 			throw new Eccezione("File conf.properties non trovato");

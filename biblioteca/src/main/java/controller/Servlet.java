@@ -15,6 +15,7 @@ import model.Prestito;
 import model.Utente;
 import serviceimpl.LoginServiceImpl;
 import serviceimpl.PrestitoServiceImpl;
+import serviceimpl.UtenteServiceImpl;
 import utilities.Eccezione;
 
 @WebServlet("*.do")
@@ -99,6 +100,19 @@ public class Servlet extends HttpServlet {
 			sc = getServletContext();
 			rd = sc.getRequestDispatcher("/" + pagina + ".jsp");
 			rd.forward(request, response);
+			break;
+		
+		case "test":
+			System.out.println("testoooooooooooooooooooooooooooooooooooooooooooooooooo");
+			Utente u = new Utente();
+			try {
+				UtenteServiceImpl us = UtenteServiceImpl.getIstance();
+				us.createUtente(u);
+			} catch (Eccezione e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 			break;
 
 		}
