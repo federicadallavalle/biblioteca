@@ -25,7 +25,7 @@ public class UtenteDao {
 		ArrayList<Utente> lista = new ArrayList<>();
 //		Connessione al db
 		Connection conn = getConnection();
-//		Estrazione degli utenti ricercando per nome, cognome, email, ruolo, username
+//		Estrazione degli utenti ricercando per LIKE i campi nome, cognome, email, ruolo, username
 		String sql = "SELECT * FROM biblioteca.utente " 
 				+ "WHERE nome LIKE '%?%', cognome LIKE '%?%', email LIKE '%?%'"
 				+ ", ruolo LIKE '%?%', username LIKE '%?%'";
@@ -37,8 +37,11 @@ public class UtenteDao {
 			ps.setString(3, ut.getEmail());
 			ps.setString(4, ut.getRuolo());
 			ps.setString(5, ut.getUsername());
+//			Esecuzione della query
 			ResultSet rs = ps.executeQuery();
+//			Risultato della query
 			while (rs.next()) {
+//				Impostazione parametri dell'oggetto trovato
 				Utente utente = new Utente();
 				utente.setId(rs.getLong("id"));
 				utente.setNome(rs.getString("nome"));
@@ -55,6 +58,7 @@ public class UtenteDao {
 				utente.setPassword(rs.getString("password"));
 				lista.add(utente);
 			}
+//			Chiusura db
 			ps.close();
 			conn.close();
 		} catch (SQLException e) {
@@ -114,12 +118,15 @@ public class UtenteDao {
 	 * @throws Eccezione gestione degli errori
 	 */
 	public static void creaUtente(Utente utente) throws Eccezione {
+//		Connessione al db
 		Connection conn = getConnection();
+//		Inserimento utente
 		String sql = "INSERT INTO biblioteca.utente "
 				+ "(nome, cognome, email, telefono, via, civico, citta, procincia, cap, ruolo, username, password) "
 				+ "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement ps = null;
 		try {
+//			Impostazione parametri per inserimento
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, utente.getNome());
 			ps.setString(2, utente.getCognome());
@@ -133,6 +140,7 @@ public class UtenteDao {
 			ps.setString(10, utente.getRuolo());
 			ps.setString(11, utente.getUsername());
 			ps.setString(12, utente.getPassword());
+//			Chiusura db
 			ps.close();
 			conn.close();
 		} catch (SQLException e) {
@@ -146,14 +154,20 @@ public class UtenteDao {
 	 * @throws Eccezione gestione degli errori
 	 */
 	public static void eliminaUtente(Long id) throws Eccezione {
+//		Connessione al db
 		Connection conn = getConnection();
+//		Cancellazione utente
 		String sql = "DELETE FROM biblioteca.utente WHERE id = ?";
 		PreparedStatement ps = null;
 		try {
+//			Impostazione parametro id per cancellazione
 			ps = conn.prepareStatement(sql);
 			ps.setLong(1, id);
 			ps.executeUpdate();
 			System.out.println("Cancellazione eseguita");
+//			Chiusura db
+			ps.close();
+			conn.close();
 		} catch (SQLException e) {
 			throw new Eccezione(e.getMessage());
 		}

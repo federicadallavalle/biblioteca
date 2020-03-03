@@ -20,27 +20,27 @@
 		<form action="/cerca-utente">
 			<label for="name">Nome: </label> 
 			<input type="text" id="name" name="nome" value="nome">
-			<br> 
+			<br>
 			<label for="cognome">Cognome: </label>
 			<input type="text" id="cognome" name="cognome" value="cognome">
 			<br>
 			<label for="email">Email: </label> 
 			<input type="text" id="email" name="email" value="email">
-			<br> 
-			<label for="email">Via: </label> 
+			<br>
+			<label for="via">Via: </label> 
 			<input type="text" id="via" name="via" value="via">
 			<label for="email">Civico: </label> 
 			<input type="text" id="civico" name="civico" value="civico">
 			<br>
-			<label for="email">Città: </label> 
+			<label for="citta">Città: </label> 
 			<input type="text" id="citta" name="citta" value="città" size="5">
-			<label for="email">Provincia: </label> 
+			<label for="provincia">Provincia: </label> 
 			<input type="text" id="provincia" name="provincia" value="provincia" size="3">
 			<br>
-			<label for="email">CAP: </label> 
+			<label for="cap">CAP: </label> 
 			<input type="text" id="cap" name="cap" value="cap" size="5">
 			<br>
-			<label for="email">Telefono: </label> 
+			<label for="telefono">Telefono: </label> 
 			<input type="text" id="telefono" name="telefono" value="telefono">
 			<br>
 			<label for="ruolo">Ruolo: </label> 
@@ -48,10 +48,10 @@
 			<input type="radio" id="ruolo" name="gestore" value="gestore">Gestore
 			<input type="radio" id="ruolo" name="amministratore" value="amministratore">Amministratore
 			<br>
-			<br> 
-			<button value="aggiungi">Aggiungi</button>
+			<br>
+			<button name="aggiungi" onclick="creaUtente(Utente utente)">Aggiungi</button>
 			&nbsp;
-			<button value="annulla">Annulla</button>
+			<button name="annulla" onclick="alert('pulsante annulla')">Annulla</button>
 		</form>
 	</div>
 	<br>
