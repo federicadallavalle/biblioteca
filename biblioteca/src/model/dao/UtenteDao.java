@@ -14,6 +14,13 @@ import utilities.Eccezione;
 
 public class UtenteDao {
 
+	/**
+	 * Ricerca gli utenti in base ai parametri passati alla condizione
+	 * nome, cognome, email, ruolo, username
+	 * @param ut parametro di tipo utente contenente i dati di ricerca degli utenti
+	 * @return lista degli utenti che soddisfano la condizione
+	 * @throws Eccezione gestione degli errori
+	 */
 	public static List<Utente> cercaUtente(Utente ut) throws Eccezione {
 		ArrayList<Utente> lista = new ArrayList<>();
 		Connection conn = getConnection();
@@ -54,6 +61,12 @@ public class UtenteDao {
 		return lista;
 	}
 	
+	/**
+	 * Ricerca dell'utente in base al campo id
+	 * @param id identificativo univoco dell'utente
+	 * @return dati dell'utente 
+	 * @throws Eccezione gestione degli errori
+	 */
 	public static Utente cercaUtentePerId(Long id) throws Eccezione {
 		Connection conn = getConnection();
 		String sql = "SELECT * FROM biblioteca.utente " 
@@ -88,6 +101,11 @@ public class UtenteDao {
 		return utente;
 	}
 
+	/**
+	 * Inserimento dei dati dell'utente 
+	 * @param utente parametro di tipo utente contenente i dati per l'inserimento nel db
+	 * @throws Eccezione gestione degli errori
+	 */
 	public static void creaUtente(Utente utente) throws Eccezione {
 		Connection conn = getConnection();
 		String sql = "INSERT INTO biblioteca.utente "
@@ -115,6 +133,11 @@ public class UtenteDao {
 		}
 	}
 
+	/**
+	 * Cancellazione dell'utente in base al parametro id
+	 * @param id identificativo univoco dell'utente
+	 * @throws Eccezione gestione degli errori
+	 */
 	public static void eliminaUtente(Long id) throws Eccezione {
 		Connection conn = getConnection();
 		String sql = "DELETE FROM biblioteca.utente WHERE id = ?";
@@ -129,6 +152,12 @@ public class UtenteDao {
 		}
 	}
 
+	/**
+	 * Aggiornamento dei dati dell'utente in base al parametro id
+	 * @param utente parametro di tipo utente contenente i dati per la modifica
+	 * @param id identificativo univoco dell'utente
+	 * @throws Eccezione gestione degli errori
+	 */
 	public static void modificaUtente(Utente utente, Long id) throws Eccezione {
 		Connection conn = getConnection();
 		String sql = "UPDATE biblioteca.utente "

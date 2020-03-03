@@ -25,12 +25,12 @@
 			<input type="text" id="civico" name="civico" value="civico">
 			<br>
 			<label for="email">Città: </label> 
-			<input type="text" id="citta" name="citta" value="città">
+			<input type="text" id="citta" name="citta" value="città" size="5">
 			<label for="email">Provincia: </label> 
-			<input type="text" id="provincia" name="provincia" value="provincia">
+			<input type="text" id="provincia" name="provincia" value="provincia" size="3">
 			<br>
 			<label for="email">CAP: </label> 
-			<input type="text" id="cap" name="cap" value="cap">
+			<input type="text" id="cap" name="cap" value="cap" size="5">
 			<br>
 			<label for="email">Telefono: </label> 
 			<input type="text" id="telefono" name="telefono" value="telefono">
