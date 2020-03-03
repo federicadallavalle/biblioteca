@@ -1,12 +1,14 @@
 package model.dao;
 
+import static utilities.DataBase.getConnection;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import static model.dao.DataBase.getConnection;
+
 import model.Utente;
 import utilities.Eccezione;
 
@@ -50,6 +52,40 @@ public class UtenteDao {
 			throw new Eccezione(e.getMessage());
 		}
 		return lista;
+	}
+	
+	public static Utente cercaUtentePerId(Long id) throws Eccezione {
+		Connection conn = getConnection();
+		String sql = "SELECT * FROM biblioteca.utente " 
+				+ "WHERE id = ?";
+		PreparedStatement ps = null;
+
+		Utente utente = new Utente();
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setLong(1, id);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				utente.setId(rs.getLong("id"));
+				utente.setNome(rs.getString("nome"));
+				utente.setCognome(rs.getString("cognome"));
+				utente.setEmail(rs.getString("email"));
+				utente.setTelefono(rs.getString("telefono"));
+				utente.setVia(rs.getString("via"));
+				utente.setCivico(rs.getString("civico"));
+				utente.setCitta(rs.getString("citta"));
+				utente.setProvincia(rs.getString("provincia"));
+				utente.setCap(rs.getString("cap"));
+				utente.setRuolo(rs.getString("ruolo"));
+				utente.setUsername(rs.getString("username"));
+				utente.setPassword(rs.getString("password"));
+			}
+			ps.close();
+			conn.close();
+		} catch (SQLException e) {
+			throw new Eccezione(e.getMessage());
+		}
+		return utente;
 	}
 
 	public static void creaUtente(Utente utente) throws Eccezione {
