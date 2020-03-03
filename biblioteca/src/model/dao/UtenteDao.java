@@ -64,11 +64,13 @@ public class UtenteDao {
 	/**
 	 * Ricerca dell'utente in base al campo id
 	 * @param id identificativo univoco dell'utente
-	 * @return dati dell'utente 
+	 * @return oggetto di tipo Utente contenente i dati dell'utente cercato
 	 * @throws Eccezione gestione degli errori
 	 */
 	public static Utente cercaUtentePerId(Long id) throws Eccezione {
+		// ottengo la connessione al db
 		Connection conn = getConnection();
+		// seleziono gli utenti corrispondenti all'id passato come paramentro
 		String sql = "SELECT * FROM biblioteca.utente " 
 				+ "WHERE id = ?";
 		PreparedStatement ps = null;
@@ -77,8 +79,11 @@ public class UtenteDao {
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setLong(1, id);
+			// eseguo la query
 			ResultSet rs = ps.executeQuery();
+			// mi aspetto di trovare al più un risultato
 			while (rs.next()) {
+				// setto i parametri dell'oggetto da restituire
 				utente.setId(rs.getLong("id"));
 				utente.setNome(rs.getString("nome"));
 				utente.setCognome(rs.getString("cognome"));

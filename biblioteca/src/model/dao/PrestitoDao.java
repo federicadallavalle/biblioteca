@@ -96,6 +96,13 @@ public class PrestitoDao {
 		return lista;
 	}
 	
+	/**
+	 * cerca gli id di tutti gli utenti che hanno ricevuto prestiti
+	 * e non hanno restituito entro 30 giorni
+	 * 
+	 * @return la lista degli id utente cercati
+	 * @throws Eccezione raccoglie le eccezioni di qualunque tipo
+	 */
 	public static List<Long> listaIdUtentiScadenze() throws Eccezione {
 		String sql = "SELECT fkIdUtente FROM biblioteca.prestito "
 				+"WHERE dataInizio < ? AND dataConsegna IS NULL";
