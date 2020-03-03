@@ -215,4 +215,14 @@ public class PrestitoDao {
 		return p;
 
 	}
+
+	public static List<Prestito> findByUtenteId(Long idUtente) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static List<Prestito> findByLibroId(Long idLibro) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
