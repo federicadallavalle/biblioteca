@@ -98,7 +98,7 @@ public class PrestitoDao {
 	
 	public static List<Long> listaIdUtentiScadenze() throws Eccezione {
 		String sql = "SELECT fkIdUtente FROM biblioteca.prestito "
-				+"WHERE dataInizio < ?";
+				+"WHERE dataInizio < ? AND dataConsegna IS NULL";
 		Connection conn = DataBase.getConnection();
 		PreparedStatement ps;
 		ArrayList<Long> lista = new ArrayList<>();

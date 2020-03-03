@@ -7,6 +7,7 @@ import model.Utente;
 import model.dao.PrestitoDao;
 import model.dao.UtenteDao;
 import service.ScadenzaService;
+import utilities.Eccezione;
 
 public class ScadenzaServiceImpl implements ScadenzaService{
 	
@@ -20,7 +21,7 @@ public class ScadenzaServiceImpl implements ScadenzaService{
 	}
 
 	@Override
-	public List<Utente> listaUtentiScadenze() {
+	public List<Utente> listaUtentiScadenze() throws Eccezione {
 		List<Long> idUtentiScadenze = PrestitoDao.listaIdUtentiScadenze();
 		List<Utente> utenti = new ArrayList<>();
 		for(Long id: idUtentiScadenze) {
