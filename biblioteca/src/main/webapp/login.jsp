@@ -13,14 +13,14 @@ body {
 </head>
 <body>
 	<div>
-		<h6>Login</h6>
+		<h2>Login</h2>
 		<form action='login.do' method='post'>
-			<input type='text' value='username' placeholder='Username'>
-			<br> <input type='password' value='password' placeholder='Password'> 
-			<br>
-			<button type='submit' value='Login'></button>
+			<input type='text' name='username' placeholder='Username'> <br>
+			<input type='password' name='password' placeholder='Password'>
+			<br> <input type='submit' value='Login'>
 		</form>
-		<a href=''>Password dimenticata</a>
+		<!-- TODO aggiungere visualizzazione messaggio errore -->
+		<a href='password-dimenticata.jsp'>Password dimenticata</a>
 	</div>
 </body>
 </html>

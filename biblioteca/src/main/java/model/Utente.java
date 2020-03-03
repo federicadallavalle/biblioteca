@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Utente {
@@ -38,7 +39,7 @@ public class Utente {
 
 	public Utente() {
 	}
-	
+
 	public Utente(String nome, String cognome, String email, String ruolo, String username) {
 		this.nome = nome;
 		this.cognome = cognome;
@@ -162,9 +163,13 @@ public class Utente {
 	@Override
 	public String toString() {
 		return "Utente [nome=" + nome + ", cognome=" + cognome + ", email=" + email + ", via=" + via + ", numCivico="
-				+ civico + ", citta=" + citta + ", provincia=" + provincia + ", cap=" + cap + ", telefono="
-				+ telefono + ", ruolo=" + ruolo + ", username=" + username + ", password=" + password + ", prestiti="
-				+ prestiti + "]";
+				+ civico + ", citta=" + citta + ", provincia=" + provincia + ", cap=" + cap + ", telefono=" + telefono
+				+ ", ruolo=" + ruolo + ", username=" + username + ", password=" + password + ", prestiti=" + prestiti
+				+ "]";
+	}
+
+	public static Utente getEmptyUtente() {
+		return new Utente("", "", "", "", "", "", "", "", "", "", "", "", Collections.<Prestito>emptyList());
 	}
 
 }

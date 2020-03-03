@@ -41,10 +41,9 @@ public class LoginServiceImpl implements LoginService {
 		Utente utenteTrovato = lista.get(0);
 		// se la password dell'utente non corrisponde alla password inserita lancia un
 		// eccezione
-		if (utenteTrovato.getPassword() != password) {
+		if (!password.equals(utenteTrovato.getPassword())) {
 			throw new Eccezione("Password errata");
 		}
-		System.out.println("Accesso eseguito");
 		// ora controlla il ruolo dell'utente che effettua l'accesso
 		switch (utenteTrovato.getRuolo()) {
 		case "iscritto": {
@@ -74,7 +73,7 @@ public class LoginServiceImpl implements LoginService {
 		int lunghezzaPassword = 7;
 		String nuovaPassword = RandomPassword.getPassword(lunghezzaPassword);
 
-		// recupero la lista di utenti che conterrà solo l'utente cercato per email
+		// recupero la lista di utenti che conterrï¿½ solo l'utente cercato per email
 		List<Utente> lista = UtenteDao.cercaUtente(utente);
 		if (lista.isEmpty()) {
 			throw new Eccezione("Email non trovata");
@@ -118,7 +117,7 @@ public class LoginServiceImpl implements LoginService {
 			message.setSubject("Campo dell'oggetto");
 
 			// Setta il messaggio vero e proprio
-			message.setText("Hai richiesto la nuova password. La nuova password è" + nuovaPassword);
+			message.setText("Hai richiesto la nuova password. La nuova password ï¿½" + nuovaPassword);
 
 			System.out.println("sending...");
 			// Invia il messaggio
@@ -127,11 +126,6 @@ public class LoginServiceImpl implements LoginService {
 		} catch (MessagingException mex) {
 			mex.printStackTrace();
 		}
-	}
-
-	@Override
-	public void nuovaPassword(HttpServletRequest request, Utente utente) {
-		// TODO Auto-generated method stub
 	}
 
 }

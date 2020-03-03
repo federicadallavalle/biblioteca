@@ -15,8 +15,9 @@ import utilities.Eccezione;
 public class UtenteDao {
 
 	/**
-	 * Ricerca gli utenti in base ai parametri passati alla condizione
-	 * nome, cognome, email, ruolo, username
+	 * Ricerca gli utenti in base ai parametri passati alla condizione nome,
+	 * cognome, email, ruolo, username
+	 * 
 	 * @param ut parametro di tipo utente contenente i dati di ricerca degli utenti
 	 * @return lista degli utenti che soddisfano la condizione
 	 * @throws Eccezione gestione degli errori
@@ -25,10 +26,10 @@ public class UtenteDao {
 		ArrayList<Utente> lista = new ArrayList<>();
 //		Connessione al db
 		Connection conn = getConnection();
-//		Estrazione degli utenti ricercando per LIKE i campi nome, cognome, email, ruolo, username
-		String sql = "SELECT * FROM biblioteca.utente " 
-				+ "WHERE nome LIKE '%?%', cognome LIKE '%?%', email LIKE '%?%'"
-				+ ", ruolo LIKE '%?%', username LIKE '%?%'";
+//		Estrazione degli utenti ricercando per nome, cognome, email, ruolo, username
+		String sql = "SELECT * FROM biblioteca.utente "
+				+ "WHERE nome LIKE concat('%', ?, '%') AND cognome LIKE concat('%', ?, '%') AND email LIKE concat('%', ?, '%') "
+				+ "AND ruolo LIKE concat('%', ?, '%') AND username LIKE concat('%', ?, '%')";
 		PreparedStatement ps = null;
 		try {
 			ps = conn.prepareStatement(sql);
@@ -66,9 +67,10 @@ public class UtenteDao {
 		}
 		return lista;
 	}
-	
+
 	/**
 	 * Ricerca dell'utente in base al campo id
+	 * 
 	 * @param id identificativo univoco dell'utente
 	 * @return oggetto di tipo Utente contenente i dati dell'utente cercato
 	 * @throws Eccezione gestione degli errori
@@ -77,8 +79,7 @@ public class UtenteDao {
 		// ottengo la connessione al db
 		Connection conn = getConnection();
 		// seleziono gli utenti corrispondenti all'id passato come paramentro
-		String sql = "SELECT * FROM biblioteca.utente " 
-				+ "WHERE id = ?";
+		String sql = "SELECT * FROM biblioteca.utente " + "WHERE id = ?";
 		PreparedStatement ps = null;
 
 		Utente utente = new Utente();
@@ -87,7 +88,7 @@ public class UtenteDao {
 			ps.setLong(1, id);
 			// eseguo la query
 			ResultSet rs = ps.executeQuery();
-			// mi aspetto di trovare al più un risultato
+			// mi aspetto di trovare al piï¿½ un risultato
 			while (rs.next()) {
 				// setto i parametri dell'oggetto da restituire
 				utente.setId(rs.getLong("id"));
@@ -113,8 +114,10 @@ public class UtenteDao {
 	}
 
 	/**
-	 * Inserimento dei dati dell'utente 
-	 * @param utente parametro di tipo utente contenente i dati per l'inserimento nel db
+	 * Inserimento dei dati dell'utente
+	 * 
+	 * @param utente parametro di tipo utente contenente i dati per l'inserimento
+	 *               nel db
 	 * @throws Eccezione gestione degli errori
 	 */
 	public static void creaUtente(Utente utente) throws Eccezione {
@@ -150,6 +153,7 @@ public class UtenteDao {
 
 	/**
 	 * Cancellazione dell'utente in base al parametro id
+	 * 
 	 * @param id identificativo univoco dell'utente
 	 * @throws Eccezione gestione degli errori
 	 */
@@ -175,16 +179,16 @@ public class UtenteDao {
 
 	/**
 	 * Aggiornamento dei dati dell'utente in base al parametro id
+	 * 
 	 * @param utente parametro di tipo utente contenente i dati per la modifica
-	 * @param id identificativo univoco dell'utente
+	 * @param id     identificativo univoco dell'utente
 	 * @throws Eccezione gestione degli errori
 	 */
 	public static void modificaUtente(Utente utente, Long id) throws Eccezione {
 		Connection conn = getConnection();
 		String sql = "UPDATE biblioteca.utente "
 				+ "SET nome = ?, cognome = ?, email = ?, telefono = ?, via = ?, civico = ?, citta = ?"
-				+ ", provincia = ? , cap = ?, ruolo = ?, username = ?, password = ? "
-				+ "WHERE id = ?";
+				+ ", provincia = ? , cap = ?, ruolo = ?, username = ?, password = ? " + "WHERE id = ?";
 		PreparedStatement ps = null;
 		try {
 			ps = conn.prepareStatement(sql);

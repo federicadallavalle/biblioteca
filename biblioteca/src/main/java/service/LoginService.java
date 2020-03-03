@@ -13,6 +13,4 @@ public interface LoginService {
 
 	void passwordDimenticata(HttpServletRequest request, Utente utente) throws Eccezione;
 
-	void nuovaPassword(HttpServletRequest request, Utente utente);
-
 }
