@@ -14,7 +14,7 @@
    <form action="/cerca-utente">
   <label for="name">Nome:</label>
   <input type="text" id="name" name="nome" value="mario"><br>
-   <label for="lname">Cognome</label>
+   <label for="lname">Cognome:</label>
   <input type="text" id="fname" name="cognome" value="rossi"><br>
    <label for="email">Email:</label>
   <input type="text" id="email" name="email" value="esempio@txt.it"><br>
