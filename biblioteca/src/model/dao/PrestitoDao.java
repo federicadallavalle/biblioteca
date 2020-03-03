@@ -1,5 +1,7 @@
 package model.dao;
 
+import static model.dao.DataBase.getConnection;
+
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -154,6 +156,20 @@ public class PrestitoDao {
 			} catch (SQLException e) {
 				throw new Eccezione(e.getMessage());
 			}
+		}
+	}
+
+	public static int countPrestitoByLibro(Libro libro) throws Eccezione {
+		Connection conn = getConnection();
+		String sql = "SELECT COUNT(id) AS libriInPrestito FROM prestito WHERE fkIdLibro = ? AND dataConsegna IS NULL";
+		PreparedStatement ps = null;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setLong(1, libro.getId());
+			ResultSet rs = ps.executeQuery();
+			return rs.getInt("libriInPrestito");
+		} catch (SQLException e) {
+			throw new Eccezione(e.getMessage());
 		}
 	}
 }
