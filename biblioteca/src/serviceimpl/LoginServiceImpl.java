@@ -56,8 +56,16 @@ public class LoginServiceImpl implements LoginService {
 		return pagina;
 	}
 	
+	@Override
 	public void passwordDimenticata(HttpServletRequest request, Utente utente) throws Eccezione {
+		String pagina = "";
 		int lunghezzaPassword = 7;
+		List<Utente> lista = UtenteDao.cercaUtente(utente);
+		if(lista.isEmpty()) {
+			throw new Eccezione("Email non trovata");
+		}
+		Utente utenteTrovato = lista.get(0);
+		
 		// recupero l'indirizzo email dell'utente nel campo di input
 		// genero la password e la inserisco nel documento da inviare all'indirizzo
 		// email dell'utente
@@ -70,4 +78,5 @@ public class LoginServiceImpl implements LoginService {
 	public void nuovaPassword(HttpServletRequest request, Utente utente) {
 		// TODO Auto-generated method stub
 	}
+
 }
