@@ -173,4 +173,57 @@ public class PrestitoDao {
 			throw new Eccezione(e.getMessage());
 		}
 	}
+
+	public static Prestito findPrestitoById(String id) throws Eccezione {
+		String sql = "SELECT * FROM biblioteca.prestito WHERE id = ?";
+		Connection conn = DataBase.getConnection();
+		PreparedStatement ps;
+		Prestito p = new Prestito();
+		try {
+			ps = conn.prepareStatement(sql);
+		} catch (SQLException e) {
+			try {
+				conn.close();
+			} catch (SQLException e1) {
+				throw new Eccezione(e1.getMessage());
+			}
+			throw new Eccezione(e.getMessage());
+		}
+		try {
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			p.setId(rs.getLong("id"));
+			p.setDataInizio(rs.getDate("dataInizio").toLocalDate());
+			p.setDataConsegna(rs.getDate("dataConsegna").toLocalDate());
+			p.setDataUltimoSollecito(rs.getDate("dataUltimoSollecito").toLocalDate());
+			// TODO settare l'utente e il libro
+			Utente u = new Utente();
+			u.setId(rs.getLong("fkIdUtente"));
+			p.setUtente(u);
+			Libro libro = new Libro();
+			libro.setId(rs.getLong("fkIdLibro"));
+			p.setLibro(libro);
+		} catch (SQLException e) {
+			throw new Eccezione(e.getMessage());
+		} finally {
+			try {
+				ps.close();
+				conn.close();
+			} catch (SQLException e) {
+				throw new Eccezione(e.getMessage());
+			}
+		}
+		return p;
+
+	}
+
+	public static List<Prestito> findByUtenteId(Long idUtente) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static List<Prestito> findByLibroId(Long idLibro) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
