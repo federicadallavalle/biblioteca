@@ -15,11 +15,12 @@ body {
 	<div>
 		<h6>Login</h6>
 		<form action='login.do' method='post'>
-			<input type="text" value="codiceUtente" placeholder="Codice utente"></input>
-			<br> <input type="password" value="password"
-				placeholder="Password"></input> <br>
-			<button type="submit">Login</button>
+			<input type='text' value='username' placeholder='Username'>
+			<br> <input type='password' value='password' placeholder='Password'> 
+			<br>
+			<button type='submit' value='Login'></button>
 		</form>
+		<a href=''>Password dimenticata</a>
 	</div>
 </body>
 </html>

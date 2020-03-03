@@ -100,12 +100,12 @@ public class LibroDao {
 			throw new Eccezione(e.getMessage());
 		}
 	}
-	
+
 	public static void deleteLibro(Long id) throws Eccezione {
 		Connection conn = getConnection();
 		String sql = "DELETE FROM prestito WHERE fkIdLibro = ?";
 		PreparedStatement ps = null;
-		
+
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setLong(1, id);
@@ -114,7 +114,20 @@ public class LibroDao {
 			ps = conn.prepareStatement(sql);
 			ps.setLong(1, id);
 			ps.executeUpdate();
-		}catch (SQLException e) {
+		} catch (SQLException e) {
+			throw new Eccezione(e.getMessage());
+		}
+	}
+
+	public static void findLibroById(Long id) throws Eccezione {
+		Connection conn = getConnection();
+		String sql = "SELECT FROM libro WHERE id = ?";
+		PreparedStatement ps = null;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setLong(1, id);
+			ps.executeUpdate();
+		} catch (SQLException e) {
 			throw new Eccezione(e.getMessage());
 		}
 	}
