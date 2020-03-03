@@ -1,6 +1,6 @@
 package model.dao;
 
-import static model.dao.DataBase.getConnection;
+import static utilities.DataBase.getConnection;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -13,6 +13,7 @@ import java.util.List;
 import model.Libro;
 import model.Prestito;
 import model.Utente;
+import utilities.DataBase;
 import utilities.Eccezione;
 
 // TODO da commentare ogni metodo
