@@ -53,6 +53,41 @@ public class UtenteDao {
 		}
 		return lista;
 	}
+	
+	public static List<Utente> cercaUtentePerId(Integer id) throws Eccezione {
+		ArrayList<Utente> lista = new ArrayList<>();
+		Connection conn = getConnection();
+		String sql = "SELECT * FROM biblioteca.utente " 
+				+ "WHERE id = ?";
+		PreparedStatement ps = null;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Utente utente = new Utente();
+				utente.setId(rs.getLong("id"));
+				utente.setNome(rs.getString("nome"));
+				utente.setCognome(rs.getString("cognome"));
+				utente.setEmail(rs.getString("email"));
+				utente.setTelefono(rs.getString("telefono"));
+				utente.setVia(rs.getString("via"));
+				utente.setCivico(rs.getString("civico"));
+				utente.setCitta(rs.getString("citta"));
+				utente.setProvincia(rs.getString("provincia"));
+				utente.setCap(rs.getString("cap"));
+				utente.setRuolo(rs.getString("ruolo"));
+				utente.setUsername(rs.getString("username"));
+				utente.setPassword(rs.getString("password"));
+				lista.add(utente);
+			}
+			ps.close();
+			conn.close();
+		} catch (SQLException e) {
+			throw new Eccezione(e.getMessage());
+		}
+		return lista;
+	}
 
 	public static void creaUtente(Utente utente) throws Eccezione {
 		Connection conn = getConnection();
