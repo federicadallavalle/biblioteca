@@ -74,7 +74,7 @@ public class LibroDao {
 		}
 	}
 
-	public static void updateLibro(Libro libro, Long id) throws Eccezione {
+	public static void updateLibro(Libro libro) throws Eccezione {
 		Connection conn = getConnection();
 		String sql = "SELECT COUNT(id) AS libriInPrestito FROM prestito WHERE fkIdLibro = ? AND dataConsegna IS NULL";
 		PreparedStatement ps = null;

@@ -16,27 +16,24 @@ public class LibroServiceImpl implements LibroService {
 		try {
 			lista = LibroDao.findAllLibro(key);
 		} catch (Eccezione e) {
-			System.out.println("mortacci");
+			System.out.println("Lista non trovata " + e.getMessage());
 		}
 		return lista;
 	}
 
 	@Override
 	public void addLibro(Libro libro) throws Eccezione {
-		// TODO Auto-generated method stub
-
+		LibroDao.createLibro(libro);
 	}
 
 	@Override
 	public void updateLibro(Libro libro) throws Eccezione {
-		// TODO Auto-generated method stub
-
+		LibroDao.updateLibro(libro);
 	}
 
 	@Override
-	public void deleteLibro(Libro libro) throws Eccezione {
-		// TODO Auto-generated method stub
-
+	public void deleteLibro(Long id) throws Eccezione {
+		LibroDao.deleteLibro(id);
 	}
 
 }

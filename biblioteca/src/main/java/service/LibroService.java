@@ -13,5 +13,5 @@ public interface LibroService {
 
 	void updateLibro(Libro libro) throws Eccezione;
 
-	void deleteLibro(Libro libro) throws Eccezione;
+	void deleteLibro(Long id) throws Eccezione;
 }
