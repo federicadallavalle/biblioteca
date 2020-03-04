@@ -53,6 +53,8 @@ public class LoginServiceImpl implements LoginService {
 		default:
 			throw new IllegalArgumentException("Unexpected value: " + utenteTrovato.getRuolo());
 		}
+		// salvo il ruolo nella sessione
+        request.getSession().setAttribute("ruolo", utenteTrovato.getRuolo());
 		return pagina;
 	}
 
@@ -72,20 +74,21 @@ public class LoginServiceImpl implements LoginService {
 			throw new Eccezione("Email non trovata");
 		}
 		Utente utenteTrovato = lista.get(0);
-		
+
 		// Rimpiazzo la vecchia password con la nuova password
 		utenteTrovato.setPassword(nuovaPassword);
 		System.out.println(utenteTrovato);
 		UtenteDao.modificaUtente(utenteTrovato, utenteTrovato.getId());
 		System.out.println(utenteTrovato);
-		
-		// Invio l'email con il metodo apposito e gli passo la password e l'indirizzo email
+
+		// Invio l'email con il metodo apposito e gli passo la password e l'indirizzo
+		// email
 		String sendTo = utenteTrovato.getEmail();
 		MessageSender.invioEmail(nuovaPassword, sendTo);
-		
+
 		pagina = "password-dimenticata";
 		return pagina;
-		//TODO: mostrare messaggio di conferma password inviata
+		// TODO: mostrare messaggio di conferma password inviata
 	}
 
 }

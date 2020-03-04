@@ -80,11 +80,11 @@ public class Servlet extends HttpServlet {
 		case "gestione-scadenze":
 			List<Utente> listaUtenti = null;
 			try {
-				//TODO: cancella stampe di prova
+				// TODO: cancella stampe di prova
 				ScadenzaService scadenzaService = ScadenzaServiceImpl.getInstance();
 				listaUtenti = scadenzaService.listaUtentiScadenze();
 				System.out.println("------------lista utenti---------------");
-				for(Utente u1: listaUtenti) {
+				for (Utente u1 : listaUtenti) {
 					System.out.println(u1.getNome());
 				}
 			} catch (Eccezione e) {
@@ -221,7 +221,7 @@ public class Servlet extends HttpServlet {
 		List<Libro> listaLibri = new ArrayList<>();
 		try {
 			listaLibri = LibroServiceImpl.getIstance().getList(key);
-		}catch(Eccezione e){
+		} catch (Eccezione e) {
 			System.out.println(e.getMessage());
 			pagina = "lista-libri-gestore";
 		}
