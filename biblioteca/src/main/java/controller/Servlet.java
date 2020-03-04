@@ -34,6 +34,8 @@ public class Servlet extends HttpServlet {
 		String pagina = "";
 		String path = request.getServletPath();
 		String comando = path.substring(1, path.lastIndexOf(".do"));
+
+		System.out.println(new java.io.File("").getAbsolutePath());
 		switch (comando) {
 
 		case "create-prestito":
