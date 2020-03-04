@@ -158,6 +158,7 @@ public class Servlet extends HttpServlet {
 		}
 		return pagina;
 	}
+	
 	private String registrazione(HttpServletRequest request) {
 		String nome = request.getParameter("nome");
 		String cognome = request.getParameter("cognome");
@@ -171,8 +172,7 @@ public class Servlet extends HttpServlet {
 		String ruolo = "iscritto";
 		String username=nome+RandomPassword.getPassword(3);
 		String password= RandomPassword.getPassword(7);
-		
-		System.out.println("testoooooooooooooooooooooooooooooooooooooooooooooooooo");
+
 		Utente u = new Utente(nome,cognome,email,via,civico,citta,provincia,cap,telefono,ruolo,username,password);
 		try {
 			UtenteServiceImpl us = UtenteServiceImpl.getIstance();
@@ -180,8 +180,7 @@ public class Servlet extends HttpServlet {
 			pagina="registrazione-utente";
 			return pagina;
 		} catch (Eccezione e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
 			return pagina;
 		}
 	}
