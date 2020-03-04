@@ -29,7 +29,7 @@
 			<br>
 			<label for="via">Via: </label> 
 			<input type="text" id="via" name="via" value="via">
-			<label for="email">Civico: </label> 
+			<label for="civico">Civico: </label> 
 			<input type="text" id="civico" name="civico" value="civico">
 			<br>
 			<label for="citta">Città: </label> 
@@ -51,7 +51,7 @@
 			<br>
 			<button name="aggiungi" onclick="creaUtente(Utente utente)">Aggiungi</button>
 			&nbsp;
-			<button name="annulla" onclick="alert('pulsante annulla')">Annulla</button>
+			<button type="reset" name="annulla">Annulla</button>
 		</form>
 	</div>
 	<br>

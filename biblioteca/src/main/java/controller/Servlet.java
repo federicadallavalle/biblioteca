@@ -25,6 +25,8 @@ import utilities.Eccezione;
 public class Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	Utente utente;
+
 	public Servlet() {
 		super();
 	}
@@ -38,6 +40,7 @@ public class Servlet extends HttpServlet {
 		String path = request.getServletPath();
 		String comando = path.substring(1, path.lastIndexOf(".do"));
 		switch (comando) {
+
 		case "create-prestito":
 			Prestito p = new Prestito();
 			p.setDataInizio(LocalDate.now());
@@ -49,7 +52,6 @@ public class Servlet extends HttpServlet {
 				System.out.println(e1.getMessage());
 			}
 			break;
-		
 		case "update-prestito":
 			p = new Prestito();
 			p.setId(Long.parseLong(request.getParameter("idPrestito")));
@@ -66,15 +68,6 @@ public class Servlet extends HttpServlet {
 			break;
 
 		case "search-prestito":
-			String idUtente = request.getParameter("idUtente");
-			String idLibro = request.getParameter("idLibro");
-			Long idToSearch;
-			if (!idUtente.equals("") && idUtente != null) {
-				idToSearch = Long.valueOf(idUtente);
-			} else if (!idLibro.equals("") && idLibro != null) {
-				idToSearch = Long.valueOf(idLibro);
-			}
-//			PrestitoServiceImpl.getInstance().
 			break;
 
 		case "delete-prestito":
@@ -87,23 +80,10 @@ public class Servlet extends HttpServlet {
 			break;
 
 		case "login":
-			String msg;
-			// recupera username e password dal form di login.jsp e controlla che nessuno
-			// dei due sia vuoto
 			String user = request.getParameter("username");
 			String password = request.getParameter("password");
-				System.out.println(password);
-			if (user.isBlank() || password.isBlank()) {
-				msg = "Impossibile avere campi vuoti";
-				request.setAttribute(msg, msg);
-				pagina = "login";
-				break;
-			}
-			// crea un utente con campi vuoti e imposta solo il nome utente
-			Utente utente = Utente.getEmptyUtente();
-			utente.setUsername(user);
+			utente = new Utente("", "", "", "", user);
 			try {
-				// chiama il service di login passando l'utente e la password inserita
 				pagina = LoginServiceImpl.getIstance().login(request, utente, password);
 			} catch (Eccezione e) {
 				System.out.println("Utente non trovato: " + e.getMessage());
@@ -111,21 +91,35 @@ public class Servlet extends HttpServlet {
 			}
 			break;
 
-		case "password-dimenticata": // manuel
+		case "password-dimenticata":
 			String email = request.getParameter("email");
-			utente = Utente.getEmptyUtente();
-			utente.setEmail(email);
+			utente = new Utente("", "", email, "", "");
 			try {
-				pagina = LoginServiceImpl.getIstance().passwordDimenticata(request, utente, email);
+				pagina = LoginServiceImpl.getIstance().login(request, utente, email);
 			} catch (Eccezione e) {
 				System.out.println("Indirizzo Email non valido: " + e.getMessage());
 				pagina = "password-dimenticata";
 			}
+			sc = getServletContext();
+			rd = sc.getRequestDispatcher("/" + pagina + ".jsp");
+			rd.forward(request, response);
 			break;
 
-		case "test":
+		case "registrazione":
+			String nome = request.getParameter("nome");
+			String cognome = request.getParameter("cognome");
+			 email = request.getParameter("email");
+			String via = request.getParameter("via");
+			String civico = request.getParameter("civico");
+			String citta = request.getParameter("citta");
+			String provincia = request.getParameter("provincia");
+			String cap = request.getParameter("cap");
+			String telefono = request.getParameter("telefono");
+			String ruolo = "iscritto";
+			
+			
 			System.out.println("testoooooooooooooooooooooooooooooooooooooooooooooooooo");
-			Utente u = new Utente();
+			Utente u = new Utente(nome,cognome,email,via,civico,citta,provincia,cap,telefono,ruolo,"aaa","bbb");
 			try {
 				UtenteServiceImpl us = UtenteServiceImpl.getIstance();
 				us.createUtente(u);
@@ -133,8 +127,10 @@ public class Servlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
+			
 			break;
+			
+		
 		
 		case "gestione-scadenze":
 			List<Utente> listaUtenti = null;
@@ -147,9 +143,6 @@ public class Servlet extends HttpServlet {
 			pagina = "gestione-scadenze";
 			break;
 		}
-		sc = getServletContext();
-		rd = sc.getRequestDispatcher("/" + pagina + ".jsp");
-		rd.forward(request, response);
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)

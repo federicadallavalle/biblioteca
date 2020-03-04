@@ -47,6 +47,24 @@ public class Utente {
 		this.ruolo = ruolo;
 		this.username = username;
 	}
+	
+	
+
+	public Utente(String nome, String cognome, String email, String via, String civico, String citta,
+			String provincia, String cap, String telefono, String ruolo,String username, String password) {
+		this.nome = nome;
+		this.cognome = cognome;
+		this.email = email;
+		this.via = via;
+		this.civico = civico;
+		this.citta = citta;
+		this.provincia = provincia;
+		this.cap = cap;
+		this.telefono = telefono;
+		this.ruolo = ruolo;
+		this.username=username;
+		this.password=password;
+	}
 
 	public Long getId() {
 		return id;

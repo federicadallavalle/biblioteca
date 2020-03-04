@@ -10,3 +10,5 @@ biblioteca/target/classes/controller/Servlet.class
 biblioteca/target/classes/utilities/DataBase.class
 
 biblioteca/target/classes/serviceimpl/LoginServiceImpl.class
+
+biblioteca/target/classes/model/dao/UtenteDao.class
