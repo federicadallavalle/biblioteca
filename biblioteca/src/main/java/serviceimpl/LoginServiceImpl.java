@@ -117,7 +117,7 @@ public class LoginServiceImpl implements LoginService {
 			message.setSubject("Campo dell'oggetto");
 
 			// Setta il messaggio vero e proprio
-			message.setText("Hai richiesto la nuova password. La nuova password �" + nuovaPassword);
+			message.setText("Hai richiesto la nuova password. La nuova password �" + nuovaPassword + "localhost");
 
 			System.out.println("sending...");
 			// Invia il messaggio

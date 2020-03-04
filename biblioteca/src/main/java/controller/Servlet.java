@@ -102,7 +102,7 @@ public class Servlet extends HttpServlet {
 			}
 			break;
 
-		case "password-dimenticata":
+		case "password-dimenticata": // manuel
 			String email = request.getParameter("email");
 			utente = new Utente("", "", email, "", "");
 			try {
