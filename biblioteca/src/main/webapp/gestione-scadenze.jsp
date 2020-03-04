@@ -26,13 +26,12 @@
                                     <td>
                                         <c:out value="${user.email}" />email
                                     </td>
-                                    <td><button type="button">Dettagli<a href="edit?id=<c:out value='${user.id}' /></button>
+                                    <td><button type="button">Dettagli<a href="edit?id=<c:out value='${user.id}' </a></button>
                             </td>
+                            </tr>
                             </c:forEach>
                           </tbody>
                     </table>
-<tr>
-</table>
 </div>
 </body>
 </html>
