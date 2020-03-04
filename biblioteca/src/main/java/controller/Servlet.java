@@ -2,7 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.time.LocalDate;
-
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -13,9 +13,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Libro;
 import model.Prestito;
 import model.Utente;
 import service.ScadenzaService;
+import serviceimpl.LibroServiceImpl;
 import serviceimpl.LoginServiceImpl;
 import serviceimpl.PrestitoServiceImpl;
 import serviceimpl.ScadenzaServiceImpl;
@@ -89,6 +91,9 @@ public class Servlet extends HttpServlet {
 			}
 			request.setAttribute("listaUtenti", listaUtenti);
 			pagina = "gestione-scadenze";
+			break;
+		case "lista-libri-gestore":
+			pagina = "lista-libri-gestore";
 			break;
 		}
 		response.sendRedirect(request.getContextPath() + "/" + pagina + ".jsp");
@@ -201,5 +206,15 @@ public class Servlet extends HttpServlet {
 			pagina = "password-dimenticata";
 		}
 		return pagina;
+	}
+	private List listaLibriGestore(HttpServletRequest request, String key) {
+		List<Libro> listaLibri = new ArrayList<>();
+		try {
+			listaLibri = LibroServiceImpl.getIstance().getList(key);
+		}catch(Eccezione e){
+			System.out.println(e.getMessage());
+			pagina = "lista-libri-gestore";
+		}
+		return listaLibri;
 	}
 }

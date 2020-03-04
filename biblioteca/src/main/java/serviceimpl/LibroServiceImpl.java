@@ -9,6 +9,17 @@ import service.LibroService;
 import utilities.Eccezione;
 
 public class LibroServiceImpl implements LibroService {
+	
+	private static LibroServiceImpl istance = null;
+
+	private LibroServiceImpl() {
+	}
+
+	public static LibroServiceImpl getIstance() {
+		if (istance == null)
+			istance = new LibroServiceImpl();
+		return istance;
+	}
 
 	@Override
 	public List<Libro> getList(String key) throws Eccezione {
