@@ -11,23 +11,26 @@
 	<h1>Gestione Scadenze</h1>
 	<div>
 		<table>
-
-			<tbody>
-				<c:forEach var="user" items="${listaUtenti}">
-					<tr>
-						<td><c:out value="${user.nome}" />Nome</td>
-						<td><c:out value="${user.cognome}" />Cognome</td>
-						<td><c:out value="${user.username}" />Username</td>
-						<td><c:out value="${user.email}" />email</td>
-						<td>
-							<button type="button">
-								Dettagli <a
-									href="dettagli-prestiti?id=<c:out value='${user.id}' />"> </a>
-							</button>
-						</td>
-					</tr>
-				</c:forEach>
-			</tbody>
+			<tr>
+				<th>Nome</th>
+				<th>Cognome</th>
+				<th>Username</th>
+				<th>Email</th>
+			</tr>
+			<c:forEach var="user" items="${listaUtenti}">
+				<tr>
+					<td><c:out value="${user.nome}" /></td>
+					<td><c:out value="${user.cognome}" /></td>
+					<td><c:out value="${user.username}" /></td>
+					<td><c:out value="${user.email}" /></td>
+					<td>
+						<button type="button">
+							Dettagli <a
+								href="dettagli-prestiti?id=<c:out value='${user.id}' />"> </a>
+						</button>
+					</td>
+				</tr>
+			</c:forEach>
 		</table>
 	</div>
 </body>

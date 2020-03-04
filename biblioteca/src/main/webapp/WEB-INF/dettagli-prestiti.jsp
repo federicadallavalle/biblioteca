@@ -5,10 +5,10 @@
 
         
 
-        <body>
+    <body>
 	  </div>
 		<ul class="navbar-nav">
- <li><a href="<%=request.getContextPath()%>/list" class="nav-link">Users</a></li>
+ 		<li><a href="<%=request.getContextPath()%>/list" class="nav-link">Users</a></li>
          </ul>
            </header>
             <br>
@@ -17,8 +17,7 @@
                     <h3 class="text-center">Dettagli Prestiti</h3>
                     <hr>
                     <div class="container text-left">
-
-                        <button type="button"><a href="<%=request.getContextPath()%>/new" class="btn btn-success">In Corso</a>
+                       <button type="button"><a href="<%=request.getContextPath()%>/new" class="btn btn-success">In Corso</a>
                        <button type="button"> <a href="<%=request.getContextPath()%>/new" class="btn btn-success">Storico</a>
                     </div>
                     <br>
@@ -35,25 +34,25 @@
                             </tr>
                         </thead>
                         <tbody>
-           <c:forEach var="user" items="${listUser}">
+           					  <c:forEach var="user" items="${listaUtenti}">
                      <tr>
                             <td>
-                            <c:out value="${ISBN}" />
+                              <c:out value="${ISBN}" />
                             </td>
                             <td>
-                            <c:out value="${TITOLO}" />
-                             </td>
-                           <td>
+                               <c:out value="${TITOLO}" />
+                            </td>
+                            <td>
                               <c:out value="${AUTORE}" />
-                               </td>
-                              <td>
-                            <c:out value="${EDITORE}" />
+                            </td>
+                            <td>
+                              <c:out value="${EDITORE}" />
                            </td>
                             <td>
-                           <c:out value="${DATA PRESTITO}" />
-                            </td>
+                              <c:out value="${DATA PRESTITO}" />
+                           </td>
                            <td>
-                          <c:out value="${DATA ULTIMO SOLLECITO}" />
+                              <c:out value="${DATA ULTIMO SOLLECITO}" />
                          </td>
                     </tr>
                             </c:forEach>
@@ -62,4 +61,4 @@
                 </div>
             </div>
         </body>
-        </html>
+    </html>
