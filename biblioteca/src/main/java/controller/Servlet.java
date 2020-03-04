@@ -44,83 +44,32 @@ public class Servlet extends HttpServlet {
 		switch (comando) {
 
 		case "create-prestito":
-			Prestito p = new Prestito();
-			p.setDataInizio(LocalDate.now());
-			p.getUtente().setId(Long.valueOf(request.getParameter("idUtente")));
-			p.getLibro().setId(Long.valueOf(request.getParameter("idLibro")));
-			try {
-				PrestitoServiceImpl.getInstance().createPrestito(p);
-			} catch (Eccezione e1) {
-				System.out.println(e1.getMessage());
-			}
+			createPrestito(request);
 			break;
-		
+
 		case "update-prestito":
-			p = new Prestito();
-			p.setId(Long.parseLong(request.getParameter("idPrestito")));
-			p.setDataInizio(LocalDate.now());
-			p.setDataConsegna(LocalDate.now());
-			p.setDataUltimoSollecito(LocalDate.now());
-			p.getUtente().setId(Long.valueOf(request.getParameter("idUtente")));
-			p.getLibro().setId(Long.valueOf(request.getParameter("idLibro")));
-			try {
-				PrestitoServiceImpl.getInstance().updatePrestito(p);
-			} catch (Eccezione e1) {
-				System.out.println(e1.getMessage());
-			}
+			updatePrestito(request);
 			break;
 
 		case "search-prestito":
 			break;
 
 		case "delete-prestito":
-			Long idPrestito = Long.parseLong(request.getParameter("idPrestito"));
-			try {
-				PrestitoServiceImpl.getInstance().deletePrestito(idPrestito);
-			} catch (Eccezione e1) {
-				System.out.println(e1.getMessage());
-			}
+			deletePrestito(request);
 			break;
 
 		case "login":
-			String user = request.getParameter("username");
-			String password = request.getParameter("password");
-			System.out.println(password);
-			if (user.isBlank() || password.isBlank()) {
-				msg = "Impossibile avere campi vuoti";
-				request.setAttribute(msg, msg);
-				pagina = "login";
-				break;
-			}
-			// crea un utente con campi vuoti e imposta solo il nome utente
-			Utente utente = Utente.getEmptyUtente();
-			utente.setUsername(user);
-			try {
-				pagina = LoginServiceImpl.getIstance().login(request, utente, password);
-			} catch (Eccezione e) {
-				System.out.println("Utente non trovato: " + e.getMessage());
-				pagina = "login";
-			}
+			pagina = login(request);
 			break;
 
 		case "password-dimenticata":
-			String email = request.getParameter("email");
-			utente = new Utente("", "", email, "", "");
-			try {
-				pagina = LoginServiceImpl.getIstance().login(request, utente, email);
-			} catch (Eccezione e) {
-				System.out.println("Indirizzo Email non valido: " + e.getMessage());
-				pagina = "password-dimenticata";
-			}
-			sc = getServletContext();
-			rd = sc.getRequestDispatcher("/" + pagina + ".jsp");
-			rd.forward(request, response);
+			pagina = passwordDimenticata(request);
 			break;
 
 		case "registrazione":
 			String nome = request.getParameter("nome");
 			String cognome = request.getParameter("cognome");
-			 email = request.getParameter("email");
+			String email = request.getParameter("email");
 			String via = request.getParameter("via");
 			String civico = request.getParameter("civico");
 			String citta = request.getParameter("citta");
@@ -128,10 +77,10 @@ public class Servlet extends HttpServlet {
 			String cap = request.getParameter("cap");
 			String telefono = request.getParameter("telefono");
 			String ruolo = "iscritto";
-			
-			
+
 			System.out.println("testoooooooooooooooooooooooooooooooooooooooooooooooooo");
-			Utente u = new Utente(nome,cognome,email,via,civico,citta,provincia,cap,telefono,ruolo,"aaa","bbb");
+			Utente u = new Utente(nome, cognome, email, via, civico, citta, provincia, cap, telefono, ruolo, "aaa",
+					"bbb");
 			try {
 				UtenteServiceImpl us = UtenteServiceImpl.getIstance();
 				us.createUtente(u);
@@ -139,7 +88,7 @@ public class Servlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 			break;
 
 		case "gestione-scadenze":
@@ -169,4 +118,74 @@ public class Servlet extends HttpServlet {
 		processRequest(request, response);
 	}
 
+	private void createPrestito(HttpServletRequest request) {
+		Prestito p = new Prestito();
+		p.setDataInizio(LocalDate.now());
+		p.getUtente().setId(Long.valueOf(request.getParameter("idUtente")));
+		p.getLibro().setId(Long.valueOf(request.getParameter("idLibro")));
+		try {
+			PrestitoServiceImpl.getInstance().createPrestito(p);
+		} catch (Eccezione e1) {
+			System.out.println(e1.getMessage());
+		}
+	}
+
+	private void updatePrestito(HttpServletRequest request) {
+		Prestito p = new Prestito();
+		p.setId(Long.parseLong(request.getParameter("idPrestito")));
+		p.setDataInizio(LocalDate.now());
+		p.setDataConsegna(LocalDate.now());
+		p.setDataUltimoSollecito(LocalDate.now());
+		p.getUtente().setId(Long.valueOf(request.getParameter("idUtente")));
+		p.getLibro().setId(Long.valueOf(request.getParameter("idLibro")));
+		try {
+			PrestitoServiceImpl.getInstance().updatePrestito(p);
+		} catch (Eccezione e1) {
+			System.out.println(e1.getMessage());
+		}
+	}
+
+	private void deletePrestito(HttpServletRequest request) {
+		Long idPrestito = Long.parseLong(request.getParameter("idPrestito"));
+		try {
+			PrestitoServiceImpl.getInstance().deletePrestito(idPrestito);
+		} catch (Eccezione e1) {
+			System.out.println(e1.getMessage());
+		}
+	}
+
+	private String login(HttpServletRequest request) {
+		String msg = "";
+		String user = request.getParameter("username");
+		String password = request.getParameter("password");
+		System.out.println(password);
+		if (user.isBlank() || password.isBlank()) {
+			msg = "Impossibile avere campi vuoti";
+			pagina = "login";
+		} else {
+			// crea un utente con campi vuoti e imposta solo il nome utente
+			Utente utente = Utente.getEmptyUtente();
+			utente.setUsername(user);
+			try {
+				pagina = LoginServiceImpl.getIstance().login(request, utente, password);
+			} catch (Eccezione e) {
+				System.out.println("Utente non trovato: " + e.getMessage());
+				pagina = "login";
+			}
+		}
+		return pagina;
+	}
+
+	private String passwordDimenticata(HttpServletRequest request) {
+		String email = request.getParameter("email");
+		utente = Utente.getEmptyUtente();
+		utente.setEmail(email);
+		try {
+			pagina = LoginServiceImpl.getIstance().login(request, utente, email);
+		} catch (Eccezione e) {
+			System.out.println("Indirizzo Email non valido: " + e.getMessage());
+			pagina = "password-dimenticata";
+		}
+		return pagina;
+	}
 }
