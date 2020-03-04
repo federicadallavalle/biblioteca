@@ -65,7 +65,7 @@ public class LoginServiceImpl implements LoginService {
 	}
 
 	@Override
-	public void passwordDimenticata(HttpServletRequest request, Utente utente) throws Eccezione {
+	public String passwordDimenticata(HttpServletRequest request, Utente utente) throws Eccezione {
 		// manuel
 		String pagina = "";
 
@@ -117,7 +117,7 @@ public class LoginServiceImpl implements LoginService {
 			message.setSubject("Campo dell'oggetto");
 
 			// Setta il messaggio vero e proprio
-			message.setText("Hai richiesto la nuova password. La nuova password �" + nuovaPassword + "localhost");
+			message.setText("Hai richiesto la nuova password. La nuova password �" + nuovaPassword + " , fai il login su: localhost:8080/login.jsp");
 
 			System.out.println("sending...");
 			// Invia il messaggio
@@ -126,6 +126,8 @@ public class LoginServiceImpl implements LoginService {
 		} catch (MessagingException mex) {
 			mex.printStackTrace();
 		}
+		pagina = "password-dimenticata";
+		return pagina;
 	}
 
 }

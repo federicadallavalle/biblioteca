@@ -8,3 +8,5 @@ biblioteca/src/main/java/utilities/DataBase.java
 biblioteca/target/classes/controller/Servlet.class
 
 biblioteca/target/classes/utilities/DataBase.class
+
+biblioteca/target/classes/serviceimpl/LoginServiceImpl.class
