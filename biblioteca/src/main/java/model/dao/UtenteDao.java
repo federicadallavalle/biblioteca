@@ -23,6 +23,7 @@ public class UtenteDao {
 	 * @throws Eccezione gestione degli errori
 	 */
 	public static List<Utente> cercaUtente(Utente ut) throws Eccezione {
+		System.out.println("cercaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 		ArrayList<Utente> lista = new ArrayList<>();
 //		Connessione al db
 		Connection conn = getConnection();
@@ -39,6 +40,8 @@ public class UtenteDao {
 			ps.setString(4, ut.getRuolo());
 			ps.setString(5, ut.getUsername());
 //			Esecuzione della query
+			System.out.println("-----------------------------------");
+			System.out.println(sql);
 			ResultSet rs = ps.executeQuery();
 //			Risultato della query
 			while (rs.next()) {
@@ -57,13 +60,18 @@ public class UtenteDao {
 				utente.setRuolo(rs.getString("ruolo"));
 				utente.setUsername(rs.getString("username"));
 				utente.setPassword(rs.getString("password"));
+				System.out.println("lllllllllllllllllllllllllllllllllllllllllllllllll");
+				System.out.println(utente);
 				lista.add(utente);
 			}
+			
 //			Chiusura db
 			ps.close();
 			conn.close();
+			
 		} catch (SQLException e) {
 			throw new Eccezione(e.getMessage());
+			
 		}
 		return lista;
 	}

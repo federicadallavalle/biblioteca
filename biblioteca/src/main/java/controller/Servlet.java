@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.ListaUtente;
 import model.Libro;
 import model.ListaLibri;
 import model.ListaUtente;
@@ -74,6 +75,9 @@ public class Servlet extends HttpServlet {
 		case "registrazione":
 			pagina = registrazione(request);
 			break;
+		case "cerca-utenti":
+			pagina=cercaUtente(request);
+		break;
 
 		case "gestione-scadenze":
 			pagina = gestioneScadenze(request);
@@ -103,6 +107,8 @@ public class Servlet extends HttpServlet {
 			throws ServletException, IOException {
 		processRequest(request, response);
 	}
+	
+	
 
 	private void createPrestito(HttpServletRequest request) {
 		p = new Prestito();
@@ -161,7 +167,43 @@ public class Servlet extends HttpServlet {
 		}
 		return pagina;
 	}
-
+	
+	private String cercaUtente(HttpServletRequest request) {
+		List<Utente> listaUtenti = new ArrayList<Utente>();
+		ListaUtente lista = (ListaUtente) request.getSession().getAttribute("listaUtenti");
+		
+		String nome = request.getParameter("nome");
+		System.out.println(nome);
+		String cognome = request.getParameter("cognome");
+		System.out.println(cognome);
+		String email = request.getParameter("email");
+		System.out.println(email);
+		String username = request.getParameter("username");
+		System.out.println(username);
+		String ruolo = request.getParameter("ruolo");
+		System.out.println(ruolo);
+		
+		
+		
+		
+		Utente u = Utente.getEmptyUtente();
+		u.setNome(nome);
+		u.setNome(cognome);
+		u.setNome(email);
+		u.setUsername(username);
+		try {
+			listaUtenti=UtenteServiceImpl.getIstance().searchUtente(u);
+			lista.setLista(listaUtenti);
+			request.getSession().setAttribute("listaUtenti", lista);
+			pagina="gestione-utente";
+			return pagina;
+		} catch (Eccezione e) {
+			System.out.println(e.getMessage());
+		}
+		
+		pagina="gestione-utente";
+		return pagina;
+	}
 	private String registrazione(HttpServletRequest request) {
 		String nome = request.getParameter("nome");
 		String cognome = request.getParameter("cognome");
