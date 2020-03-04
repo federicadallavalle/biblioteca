@@ -81,6 +81,7 @@ public class Servlet extends HttpServlet {
 			// dei due sia vuoto
 			String user = request.getParameter("username");
 			String password = request.getParameter("password");
+				System.out.println(password);
 			if (user.isBlank() || password.isBlank()) {
 				msg = "Impossibile avere campi vuoti";
 				request.setAttribute(msg, msg);

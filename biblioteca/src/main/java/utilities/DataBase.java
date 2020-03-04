@@ -14,7 +14,7 @@ public class DataBase {
 	public static Connection getConnection() throws Eccezione{
 		FileReader reader = null;	
 		try {
-			reader = new FileReader("C:\\Users\\115894\\eclipse-workspace\\biblioteca\\conf.properties");
+			reader = new FileReader("C:\\Users\\LENOVO\\Documents\\biblioteca\\biblioteca\\conf.properties");
 			// pc saccone reader = new FileReader("C:\\Users\\HP-CND9444HNV\\Desktop\\biblioteca\\biblioteca\\conf.properties");
 			
 			p.load(reader);
