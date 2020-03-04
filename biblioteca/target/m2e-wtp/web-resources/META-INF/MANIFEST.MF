@@ -1,8 +1,12 @@
 Manifest-Version: 1.0
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 Built-By: CND9490C4H
 =======
 Built-By: VON Samsung
+>>>>>>> Stashed changes
+=======
+Built-By: CND9444DN9
 >>>>>>> Stashed changes
 Build-Jdk: 13.0.2
 Created-By: Maven Integration for Eclipse
