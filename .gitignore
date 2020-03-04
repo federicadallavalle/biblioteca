@@ -16,3 +16,5 @@ biblioteca/target/classes/model/dao/UtenteDao.class
 biblioteca/target/classes/model/Utente.class
 
 *.class
+
+*.MF
