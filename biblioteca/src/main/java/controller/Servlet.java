@@ -83,6 +83,7 @@ public class Servlet extends HttpServlet {
 			break;
 
 		case "login":
+			String msg = "";
 			String user = request.getParameter("username");
 			String password = request.getParameter("password");
 			System.out.println(password);
