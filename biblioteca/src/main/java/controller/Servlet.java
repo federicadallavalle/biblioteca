@@ -116,9 +116,9 @@ public class Servlet extends HttpServlet {
 	private void updatePrestito(HttpServletRequest request) {
 		p = new Prestito();
 		p.setId(Long.parseLong(request.getParameter("idPrestito")));
-		p.setDataInizio(LocalDate.now());
-		p.setDataConsegna(LocalDate.now());
-		p.setDataUltimoSollecito(LocalDate.now());
+		p.setDataInizio(LocalDate.parse(request.getParameter("dataInizio")));
+		p.setDataConsegna(LocalDate.parse(request.getParameter("dataConsegna")));
+		p.setDataUltimoSollecito(LocalDate.parse(request.getParameter("dataUltimoSollecito")));
 		p.getUtente().setId(Long.valueOf(request.getParameter("idUtente")));
 		p.getLibro().setId(Long.valueOf(request.getParameter("idLibro")));
 		try {
