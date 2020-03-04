@@ -9,13 +9,13 @@ import model.dao.UtenteDao;
 import service.ScadenzaService;
 import utilities.Eccezione;
 
-public class ScadenzaServiceImpl implements ScadenzaService{
-	
+public class ScadenzaServiceImpl implements ScadenzaService {
+
 	private static ScadenzaServiceImpl instance = new ScadenzaServiceImpl();
-	
+
 	private ScadenzaServiceImpl() {
 	}
-	
+
 	/**
 	 * Metodo accessore del singleton ScadenzaService
 	 * 
@@ -30,10 +30,13 @@ public class ScadenzaServiceImpl implements ScadenzaService{
 		// recupero la lista degi id degli utenti che hanno scadenze
 		List<Long> idUtentiScadenze = PrestitoDao.listaIdUtentiScadenze();
 		List<Utente> utenti = new ArrayList<>();
-		// per ogni id utente trovato, recuper l'utente corrispondente
-		for(Long id: idUtentiScadenze) {
-			utenti.add(UtenteDao.cercaUtentePerId(id));
+		// se la lista degli id non è vuota
+		if (idUtentiScadenze != null) {
+			// per ogni id utente trovato, recupero l'utente corrispondente
+			for (Long id : idUtentiScadenze) {
+				utenti.add(UtenteDao.cercaUtentePerId(id));
+			}
 		}
 		return utenti;
-	}	
+	}
 }
