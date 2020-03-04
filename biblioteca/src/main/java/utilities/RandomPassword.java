@@ -7,11 +7,11 @@ public class RandomPassword {
 	     * composta da caratteri in UpperCase e LowerCase e caratteri speciali
 	     */
 	
-	    public static String getPassword(int n) 
+	    public static String getPassword(int n)
 	    { 
 	  
 	        // Caratteri che uso nello StringBuilder
-	        String caratteriUsati = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"+"0123456789"+"abcdefghijklmnopqrstuvxyz"+"-_?!$%&"; 
+	        String caratteriUsati = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"+"0123456789"+"abcdefghijklmnopqrstuvxyz"+"-_?!$%&";
 	  
 	        // Creo StringBuilder che prende in entrata la lunghezza n della password da generare 
 	        StringBuilder sb = new StringBuilder(n); 
@@ -26,7 +26,7 @@ public class RandomPassword {
 	            // Aggiungo i caratteri uno a uno nello StringBuilder sb
 	            // prendendo il carattere in corrispondenza del numero index generato prima
 	            sb.append(caratteriUsati.charAt(index)); 
-	        } 
+	        }
 	        
 	        return sb.toString(); 
 	    } 
