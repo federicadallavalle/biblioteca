@@ -15,7 +15,7 @@ public class DataBase {
 		FileReader reader = null;
 		try {
 			// TODO settare un percorso relativo per il conf.properties
-			reader = new FileReader("conf.properties");
+			reader = new FileReader("C:\\Users\\CND9444DN9\\Desktop\\Workspace Eclipse\\biblioteca\\biblioteca\\conf.properties");
 			p.load(reader);
 		} catch (FileNotFoundException e) {
 			throw new Eccezione("File conf.properties non trovato"

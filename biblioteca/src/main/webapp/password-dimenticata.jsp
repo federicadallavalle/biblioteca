@@ -17,10 +17,16 @@ body {
 		<br> Inserisci l'email nel campo sottostante. 
 		<br> Riceverai un link con la nuova password che dovrai inserire nel prossimo step.
 		<form action='password-dimenticata.do' method='post'>
-			<input type="text" value="email" placeholder="Indirizzo email"></input>
+			<input type="text" name="email" placeholder="Indirizzo email"></input>
 			<br>
-			<button type="submit">Invia</button>
+			<input type="submit" value="Invia">
 		</form>
-		</div>div>
+		</div>
+		
+		<%
+		String msg = "";
+		System.out.println("Ti abbiamo inviato una mail con la nuova password");
+		%>
+		
 </body>
 </html>

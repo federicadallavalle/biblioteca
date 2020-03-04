@@ -113,9 +113,10 @@ public class Servlet extends HttpServlet {
 
 		case "password-dimenticata": // manuel
 			String email = request.getParameter("email");
-			utente = new Utente("", "", email, "", "");
+			utente = Utente.getEmptyUtente();
+			utente.setEmail(email);
 			try {
-				pagina = LoginServiceImpl.getIstance().passwordDimenticata(request, utente);
+				pagina = LoginServiceImpl.getIstance().passwordDimenticata(request, utente, email);
 			} catch (Eccezione e) {
 				System.out.println("Indirizzo Email non valido: " + e.getMessage());
 				pagina = "password-dimenticata";

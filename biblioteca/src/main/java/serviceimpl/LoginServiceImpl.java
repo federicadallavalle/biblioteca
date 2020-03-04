@@ -65,7 +65,7 @@ public class LoginServiceImpl implements LoginService {
 	}
 
 	@Override
-	public String passwordDimenticata(HttpServletRequest request, Utente utente) throws Eccezione {
+	public String passwordDimenticata(HttpServletRequest request, Utente utente, String email) throws Eccezione {
 		// manuel
 		String pagina = "";
 
@@ -75,6 +75,7 @@ public class LoginServiceImpl implements LoginService {
 
 		// Recupero la lista di utenti che conterr� solo l'utente cercato per email
 		List<Utente> lista = UtenteDao.cercaUtente(utente);
+		System.out.println(utente);
 		if (lista.isEmpty()) {
 			throw new Eccezione("Email non trovata");
 		}
