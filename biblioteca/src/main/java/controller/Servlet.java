@@ -152,6 +152,7 @@ public class Servlet extends HttpServlet {
 			} catch (Eccezione e) {
 				e.printStackTrace();
 			}
+			request.setAttribute("listaUtenti", listaUtenti);
 			pagina = "gestione-scadenze";
 			break;
 		}
