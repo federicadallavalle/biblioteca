@@ -76,9 +76,15 @@ public class Servlet extends HttpServlet {
 		case "gestione-scadenze":
 			List<Utente> listaUtenti = null;
 			try {
+				//TODO: cancella stampe di prova
 				ScadenzaService scadenzaService = ScadenzaServiceImpl.getInstance();
 				listaUtenti = scadenzaService.listaUtentiScadenze();
+				System.out.println("------------lista utenti---------------");
+				for(Utente u1: listaUtenti) {
+					System.out.println(u1.getNome());
+				}
 			} catch (Eccezione e) {
+				System.out.println("------------fallito---------------");
 				e.printStackTrace();
 			}
 			request.setAttribute("listaUtenti", listaUtenti);
