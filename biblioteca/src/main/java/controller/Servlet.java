@@ -105,7 +105,7 @@ public class Servlet extends HttpServlet {
 			String email = request.getParameter("email");
 			utente = new Utente("", "", email, "", "");
 			try {
-				pagina = LoginServiceImpl.getIstance().login(request, utente, email);
+				pagina = LoginServiceImpl.getIstance().passwordDimenticata(request, utente);
 			} catch (Eccezione e) {
 				System.out.println("Indirizzo Email non valido: " + e.getMessage());
 				pagina = "password-dimenticata";
@@ -124,7 +124,6 @@ public class Servlet extends HttpServlet {
 			}
 			
 			break;
-
 		}
 		sc = getServletContext();
 		rd = sc.getRequestDispatcher("/" + pagina + ".jsp");
