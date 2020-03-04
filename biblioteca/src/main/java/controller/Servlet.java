@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -13,8 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.Prestito;
 import model.Utente;
+import service.ScadenzaService;
 import serviceimpl.LoginServiceImpl;
 import serviceimpl.PrestitoServiceImpl;
+import serviceimpl.ScadenzaServiceImpl;
 import serviceimpl.UtenteServiceImpl;
 import utilities.Eccezione;
 
@@ -112,10 +115,11 @@ public class Servlet extends HttpServlet {
 			String provincia = request.getParameter("provincia");
 			String cap = request.getParameter("cap");
 			String telefono = request.getParameter("telefono");
-			String ruolo = request.getParameter("ruolo");
+			String ruolo = "iscritto";
+			
 			
 			System.out.println("testoooooooooooooooooooooooooooooooooooooooooooooooooo");
-			Utente u = new Utente();
+			Utente u = new Utente(nome,cognome,email,via,civico,citta,provincia,cap,telefono,ruolo,"aaa","bbb");
 			try {
 				UtenteServiceImpl us = UtenteServiceImpl.getIstance();
 				us.createUtente(u);

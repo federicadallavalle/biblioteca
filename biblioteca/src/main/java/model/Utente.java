@@ -50,9 +50,8 @@ public class Utente {
 	
 	
 
-	public Utente(Long id, String nome, String cognome, String email, String via, String civico, String citta,
-			String provincia, String cap, String telefono, String ruolo) {
-		this.id = id;
+	public Utente(String nome, String cognome, String email, String via, String civico, String citta,
+			String provincia, String cap, String telefono, String ruolo,String username, String password) {
 		this.nome = nome;
 		this.cognome = cognome;
 		this.email = email;
@@ -63,6 +62,8 @@ public class Utente {
 		this.cap = cap;
 		this.telefono = telefono;
 		this.ruolo = ruolo;
+		this.username=username;
+		this.password=password;
 	}
 
 	public Long getId() {
