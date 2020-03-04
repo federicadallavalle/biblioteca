@@ -16,6 +16,7 @@ import model.Utente;
 import serviceimpl.LoginServiceImpl;
 import serviceimpl.PrestitoServiceImpl;
 import serviceimpl.UtenteServiceImpl;
+import utilities.DataBase;
 import utilities.Eccezione;
 
 @WebServlet("*.do")
@@ -37,7 +38,6 @@ public class Servlet extends HttpServlet {
 
 		System.out.println(new java.io.File("").getAbsolutePath());
 		switch (comando) {
-
 		case "create-prestito":
 			Prestito p = new Prestito();
 			p.setDataInizio(LocalDate.now());
@@ -66,6 +66,15 @@ public class Servlet extends HttpServlet {
 			break;
 
 		case "search-prestito":
+			String idUtente = request.getParameter("idUtente");
+			String idLibro = request.getParameter("idLibro");
+			Long idToSearch;
+			if (!idUtente.equals("") && idUtente != null) {
+				idToSearch = Long.valueOf(idUtente);
+			} else if (!idLibro.equals("") && idLibro != null) {
+				idToSearch = Long.valueOf(idLibro);
+			}
+//			PrestitoServiceImpl.getInstance().
 			break;
 
 		case "delete-prestito":
@@ -112,7 +121,7 @@ public class Servlet extends HttpServlet {
 				pagina = "password-dimenticata";
 			}
 			break;
-		
+
 		case "test":
 			System.out.println("testoooooooooooooooooooooooooooooooooooooooooooooooooo");
 			Utente u = new Utente();
@@ -123,7 +132,7 @@ public class Servlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 			break;
 		}
 		sc = getServletContext();

@@ -10,20 +10,21 @@ import java.util.Properties;
 
 public class DataBase {
 	private static Properties p = new Properties();
-	
-	public static Connection getConnection() throws Eccezione{
-		FileReader reader = null;	
+
+	public static Connection getConnection() throws Eccezione {
+		FileReader reader = null;
 		try {
-			reader = new FileReader("C:\\Users\\LENOVO\\Documents\\biblioteca\\biblioteca\\conf.properties");
-			// pc saccone reader = new FileReader("C:\\Users\\HP-CND9444HNV\\Desktop\\biblioteca\\biblioteca\\conf.properties");
-			
+			// TODO settare un percorso relativo per il conf.properties
+			reader = new FileReader("conf.properties");
 			p.load(reader);
 		} catch (FileNotFoundException e) {
-			throw new Eccezione("File conf.properties non trovato");
+			throw new Eccezione("File conf.properties non trovato"
+					// TODO settare un percorso relativo per il conf.properties
+					+ "\nCopiare il file sul desktop");
 		} catch (IOException e) {
 			throw new Eccezione(e.getMessage());
 		}
-		
+
 		String user = p.getProperty("user");
 		String password = p.getProperty("password");
 		String jdbc = p.getProperty("jdbc");
