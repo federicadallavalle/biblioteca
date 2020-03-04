@@ -1,5 +1,22 @@
+<%@page import="model.Libro"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%-- <jsp:useBean id="libri" scope="session" class="ArrayList<Libro>" /> --%>
+<%
+	ArrayList<Libro> libri = new ArrayList<>();
+	// TODO : stub
+	Libro libro = new Libro();
+	libro.setId(1l);
+	libro.setTitolo("TitoloTest1");
+	libro.setQta(12);
+	libri.add(libro);
+	libro = new Libro();
+	libro.setId(2l);
+	libro.setTitolo("TitoloTest2");
+	libro.setQta(24);
+	libri.add(libro);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,10 +25,27 @@
 </head>
 <h1>HOME</h1>
 <body>
-	<a href="gestione-utente.jsp"><button>Gestione delle iscrizioni degli utenti</button></a><br><br>
-	<a href="lista-libri-gestore.jsp"><button>Gestione del collocamento dei libri nella biblioteca</button></a><br><br>
-	<button>Gestione dei prestiti ad un utente iscritto</button><br><br>
-	<a href="gestione-scadenze.jsp"><button>Gestione delle scadenze</button></a><br><br>
-	<button>Gestione dei profili utenti(addetti-utenti)</button>
+	<table>
+		<%
+			for (Libro l : libri) {
+		%>
+		<tr>
+			<td>
+				<%
+					out.print(l.getTitolo());
+				%>
+			</td>
+			<td>
+				<%
+					out.print(l.getQta());
+				%>
+			</td>
+			<td><a
+				href='dettagli-libro.do?idLibro=<%out.print(l.getId());%>'><button>Dettagli</button></a></td>
+		</tr>
+		<%
+			}
+		%>
+	</table>
 </body>
 </html>
