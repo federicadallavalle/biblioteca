@@ -13,7 +13,7 @@ body {
 </head>
 <body>
 		<div>
-		<h6>Password Dimenticata</h6>
+		<h2>Password Dimenticata</h2>
 		<br> Inserisci l'email nel campo sottostante. 
 		<br> Riceverai un link con la nuova password che dovrai inserire nel prossimo step.
 		<form action='password-dimenticata.do' method='post'>
