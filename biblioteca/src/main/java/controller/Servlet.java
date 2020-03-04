@@ -207,7 +207,7 @@ public class Servlet extends HttpServlet {
 		}
 		return pagina;
 	}
-	private List listaLibriGestore(HttpServletRequest request, String key) {
+	private List<Libro> listaLibriGestore(HttpServletRequest request, String key) {
 		List<Libro> listaLibri = new ArrayList<>();
 		try {
 			listaLibri = LibroServiceImpl.getIstance().getList(key);
