@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -13,10 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.Prestito;
 import model.Utente;
+import service.ScadenzaService;
 import serviceimpl.LoginServiceImpl;
 import serviceimpl.PrestitoServiceImpl;
+import serviceimpl.ScadenzaServiceImpl;
 import serviceimpl.UtenteServiceImpl;
-import utilities.DataBase;
 import utilities.Eccezione;
 
 @WebServlet("*.do")
@@ -131,6 +133,17 @@ public class Servlet extends HttpServlet {
 				e.printStackTrace();
 			}
 
+			break;
+		
+		case "gestione-scadenze":
+			List<Utente> listaUtenti = null;
+			try {
+				ScadenzaService scadenzaService = ScadenzaServiceImpl.getInstance();
+				listaUtenti = scadenzaService.listaUtentiScadenze();
+			} catch(Eccezione e) {
+				e.printStackTrace();
+			}
+			pagina = "gestione-scadenze";
 			break;
 		}
 		sc = getServletContext();
