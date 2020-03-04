@@ -69,11 +69,11 @@ public class LoginServiceImpl implements LoginService {
 		// manuel
 		String pagina = "";
 
-		// imposto la lunghezza della nuova password e la creo
+		// Imposto la lunghezza della nuova password e la creo
 		int lunghezzaPassword = 7;
 		String nuovaPassword = RandomPassword.getPassword(lunghezzaPassword);
 
-		// recupero la lista di utenti che conterr� solo l'utente cercato per email
+		// Recupero la lista di utenti che conterr� solo l'utente cercato per email
 		List<Utente> lista = UtenteDao.cercaUtente(utente);
 		if (lista.isEmpty()) {
 			throw new Eccezione("Email non trovata");
@@ -92,19 +92,19 @@ public class LoginServiceImpl implements LoginService {
 		properties.put("mail.smtp.ssl.enable", "true");
 		properties.put("mail.smtp.auth", "true");
 
-		// prendo l'istanza della sessione, recupero le properties e passo email e
+		// Prendo l'istanza della sessione, recupero le properties e passo email e
 		// password
-		Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
+		Session session = Session.getInstance (properties, new javax.mail.Authenticator() {
 
 			protected PasswordAuthentication getPasswordAuthentication() {
 
 				return new PasswordAuthentication("libreriavalueson@gmail.com", "Libreria00");
 
 			}
-		});
+		}	);
 
 		try {
-			// creo il messaggio
+			// Creo il messaggio
 			MimeMessage message = new MimeMessage(session);
 
 			// Setta l'header del campo from

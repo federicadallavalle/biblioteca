@@ -105,10 +105,15 @@ public class UtenteDao {
 				utente.setUsername(rs.getString("username"));
 				utente.setPassword(rs.getString("password"));
 			}
-			ps.close();
-			conn.close();
 		} catch (SQLException e) {
 			throw new Eccezione(e.getMessage());
+		} finally {
+			try {
+				ps.close();
+				conn.close();
+			} catch (SQLException e) {
+				throw new Eccezione(e.getMessage());
+			}
 		}
 		return utente;
 	}
@@ -143,12 +148,11 @@ public class UtenteDao {
 //			ps.setString(10, utente.getRuolo());
 //			ps.setString(11, utente.getUsername());
 //			ps.setString(12, utente.getPassword());
-			
-			
+
 			ps.setString(1, "5r5t56y66");
 			ps.setString(2, "7");
 			ps.setString(3, "4");
-			ps.setString(4,	"4" );
+			ps.setString(4, "4");
 			ps.setString(5, "4");
 			ps.setString(6, "4");
 			ps.setString(7, "4");
@@ -157,7 +161,7 @@ public class UtenteDao {
 			ps.setString(10, "4");
 			ps.setString(11, "4");
 			ps.setString(12, "4");
-			int i=ps.executeUpdate();
+			int i = ps.executeUpdate();
 			System.out.println(+i);
 //			Chiusura db
 			ps.close();

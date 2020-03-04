@@ -34,6 +34,8 @@ public class Servlet extends HttpServlet {
 		String pagina = "";
 		String path = request.getServletPath();
 		String comando = path.substring(1, path.lastIndexOf(".do"));
+
+		System.out.println(new java.io.File("").getAbsolutePath());
 		switch (comando) {
 
 		case "create-prestito":
@@ -104,7 +106,7 @@ public class Servlet extends HttpServlet {
 			String email = request.getParameter("email");
 			utente = new Utente("", "", email, "", "");
 			try {
-				pagina = LoginServiceImpl.getIstance().login(request, utente, email);
+				pagina = LoginServiceImpl.getIstance().passwordDimenticata(request, utente);
 			} catch (Eccezione e) {
 				System.out.println("Indirizzo Email non valido: " + e.getMessage());
 				pagina = "password-dimenticata";
@@ -123,7 +125,6 @@ public class Servlet extends HttpServlet {
 			}
 			
 			break;
-
 		}
 		sc = getServletContext();
 		rd = sc.getRequestDispatcher("/" + pagina + ".jsp");

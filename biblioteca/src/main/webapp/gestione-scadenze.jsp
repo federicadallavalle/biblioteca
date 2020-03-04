@@ -15,18 +15,19 @@
                             <c:forEach var="user" items="${listUser}">
                                 <tr>
                                     <td>
-                                        <c:out value="${user.id}" />Nome
+                                        <c:out value="${user.nome}" />Nome
                                     </td>
                                     <td>
-                                        <c:out value="${user.name}" />Cognome
+                                        <c:out value="${user.cognome}" />Cognome
                                     </td>
                                     <td>
-                                        <c:out value="${user.email}" />Username
+                                        <c:out value="${user.username}" />Username
                                     </td>
                                     <td>
-                                        <c:out value="${user.country}" />email
+                                        <c:out value="${user.email}" />email
                                     </td>
                                     <td><button type="button">Dettagli<a href="edit?id=<c:out value='${user.id}' /></button>
+                            </td>
                             </c:forEach>
                           </tbody>
                     </table>
