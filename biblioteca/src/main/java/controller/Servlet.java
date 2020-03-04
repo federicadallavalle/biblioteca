@@ -2,7 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -21,6 +21,7 @@ import serviceimpl.PrestitoServiceImpl;
 import serviceimpl.ScadenzaServiceImpl;
 import serviceimpl.UtenteServiceImpl;
 import utilities.Eccezione;
+import utilities.RandomPassword;
 
 @WebServlet("*.do")
 public class Servlet extends HttpServlet {
@@ -130,10 +131,11 @@ public class Servlet extends HttpServlet {
 			String cap = request.getParameter("cap");
 			String telefono = request.getParameter("telefono");
 			String ruolo = "iscritto";
-			
+			String username=nome+RandomPassword.getPassword(3);
+			password= RandomPassword.getPassword(4);
 			
 			System.out.println("testoooooooooooooooooooooooooooooooooooooooooooooooooo");
-			Utente u = new Utente(nome,cognome,email,via,civico,citta,provincia,cap,telefono,ruolo,"aaa","bbb");
+			Utente u = new Utente(nome,cognome,email,via,civico,citta,provincia,cap,telefono,ruolo,username,password);
 			try {
 				UtenteServiceImpl us = UtenteServiceImpl.getIstance();
 				us.createUtente(u);
