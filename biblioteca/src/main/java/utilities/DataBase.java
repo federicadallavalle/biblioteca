@@ -20,7 +20,7 @@ public class DataBase {
 		} catch (FileNotFoundException e) {
 			throw new Eccezione("File conf.properties non trovato"
 					// TODO settare un percorso relativo per il conf.properties
-					+ "\nCopiare il file sul desktop");
+					+ "\nCopiare il file in: " + new java.io.File("").getAbsolutePath());
 		} catch (IOException e) {
 			throw new Eccezione(e.getMessage());
 		}
