@@ -28,6 +28,7 @@ public class Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	Utente utente;
+	Prestito p;
 
 	public Servlet() {
 		super();
@@ -80,7 +81,7 @@ public class Servlet extends HttpServlet {
 			String telefono = request.getParameter("telefono");
 			String ruolo = "iscritto";
 			String username=nome+RandomPassword.getPassword(3);
-			password= RandomPassword.getPassword(4);
+			String password= RandomPassword.getPassword(4);
 			
 			System.out.println("testoooooooooooooooooooooooooooooooooooooooooooooooooo");
 			Utente u = new Utente(nome,cognome,email,via,civico,citta,provincia,cap,telefono,ruolo,username,password);
@@ -123,7 +124,7 @@ public class Servlet extends HttpServlet {
 	}
 
 	private void createPrestito(HttpServletRequest request) {
-		Prestito p = new Prestito();
+		p = new Prestito();
 		p.setDataInizio(LocalDate.now());
 		p.getUtente().setId(Long.valueOf(request.getParameter("idUtente")));
 		p.getLibro().setId(Long.valueOf(request.getParameter("idLibro")));
@@ -135,7 +136,7 @@ public class Servlet extends HttpServlet {
 	}
 
 	private void updatePrestito(HttpServletRequest request) {
-		Prestito p = new Prestito();
+		p = new Prestito();
 		p.setId(Long.parseLong(request.getParameter("idPrestito")));
 		p.setDataInizio(LocalDate.now());
 		p.setDataConsegna(LocalDate.now());
