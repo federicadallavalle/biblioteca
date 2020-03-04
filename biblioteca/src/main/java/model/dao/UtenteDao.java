@@ -125,24 +125,40 @@ public class UtenteDao {
 		Connection conn = getConnection();
 //		Inserimento utente
 		String sql = "INSERT INTO biblioteca.utente "
-				+ "(nome, cognome, email, telefono, via, civico, citta, procincia, cap, ruolo, username, password) "
+				+ "(nome, cognome, email, telefono, via, civico, citta, provincia, cap, ruolo, username, password) "
 				+ "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement ps = null;
 		try {
 //			Impostazione parametri per inserimento
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, utente.getNome());
-			ps.setString(2, utente.getCognome());
-			ps.setString(3, utente.getEmail());
-			ps.setString(4, utente.getTelefono());
-			ps.setString(5, utente.getVia());
-			ps.setString(6, utente.getCivico());
-			ps.setString(7, utente.getCitta());
-			ps.setString(8, utente.getProvincia());
-			ps.setString(9, utente.getCap());
-			ps.setString(10, utente.getRuolo());
-			ps.setString(11, utente.getUsername());
-			ps.setString(12, utente.getPassword());
+//			ps.setString(1, utente.getNome());
+//			ps.setString(2, utente.getCognome());
+//			ps.setString(3, utente.getEmail());
+//			ps.setString(4, utente.getTelefono());
+//			ps.setString(5, utente.getVia());
+//			ps.setString(6, utente.getCivico());
+//			ps.setString(7, utente.getCitta());
+//			ps.setString(8, utente.getProvincia());
+//			ps.setString(9, utente.getCap());
+//			ps.setString(10, utente.getRuolo());
+//			ps.setString(11, utente.getUsername());
+//			ps.setString(12, utente.getPassword());
+			
+			
+			ps.setString(1, "5r5t56y66");
+			ps.setString(2, "7");
+			ps.setString(3, "4");
+			ps.setString(4,	"4" );
+			ps.setString(5, "4");
+			ps.setString(6, "4");
+			ps.setString(7, "4");
+			ps.setString(8, "4");
+			ps.setString(9, "4");
+			ps.setString(10, "4");
+			ps.setString(11, "4");
+			ps.setString(12, "4");
+			int i=ps.executeUpdate();
+			System.out.println(+i);
 //			Chiusura db
 			ps.close();
 			conn.close();

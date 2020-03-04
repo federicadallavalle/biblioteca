@@ -15,6 +15,7 @@ import model.Prestito;
 import model.Utente;
 import serviceimpl.LoginServiceImpl;
 import serviceimpl.PrestitoServiceImpl;
+import serviceimpl.UtenteServiceImpl;
 import utilities.Eccezione;
 
 @WebServlet("*.do")
@@ -108,6 +109,20 @@ public class Servlet extends HttpServlet {
 				pagina = "password-dimenticata";
 			}
 			break;
+		
+		case "test":
+			System.out.println("testoooooooooooooooooooooooooooooooooooooooooooooooooo");
+			Utente u = new Utente();
+			try {
+				UtenteServiceImpl us = UtenteServiceImpl.getIstance();
+				us.createUtente(u);
+			} catch (Eccezione e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			break;
+
 		}
 		sc = getServletContext();
 		rd = sc.getRequestDispatcher("/" + pagina + ".jsp");
