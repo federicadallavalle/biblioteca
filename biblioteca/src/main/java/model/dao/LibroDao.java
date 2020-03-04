@@ -27,11 +27,12 @@ public class LibroDao {
 			Connection conn = getConnection();
 			// Cerca libri che contengano la chiave di ricerca nel titolo, autore, editore e
 			// isbn
-			String sql = "SELECT * FROM libro WHERE " + "titolo='%" + key + "%' OR " + "autore='%" + key + "%' OR "
-					+ "editore='%" + key + "%' OR " + "isbn='%" + key + "%'";
+			String sql = "SELECT * FROM libro WHERE titolo LIKE concat('%', ?, '%') OR "
+					+ "autore LIKE concat('%', ?, '%') OR editore LIKE concat('%', ?, '%') OR "
+					+ "isbn LIKE concat('%', ?, '%')";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
-			// finchè ci sono libri li aggiunge alla lista
+			// finchï¿½ ci sono libri li aggiunge alla lista
 			while (rs.next()) {
 				Libro libro = new Libro();
 				libro.setId(rs.getLong("id"));
@@ -94,7 +95,7 @@ public class LibroDao {
 				ps.setLong(8, libro.getId());
 				ps.executeUpdate();
 			} else {
-				throw new Eccezione("Quantità minore dei libri attualmente in prestito");
+				throw new Eccezione("Quantitï¿½ minore dei libri attualmente in prestito");
 			}
 		} catch (SQLException e) {
 			throw new Eccezione(e.getMessage());
