@@ -5,8 +5,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,9 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.Libro;
 import model.ListaLibri;
+import model.ListaUtente;
 import model.Prestito;
 import model.Utente;
-import service.LibroService;
 import service.ScadenzaService;
 import serviceimpl.LibroServiceImpl;
 import serviceimpl.LoginServiceImpl;
@@ -78,21 +76,7 @@ public class Servlet extends HttpServlet {
 			break;
 
 		case "gestione-scadenze":
-			List<Utente> listaUtenti = null;
-			try {
-				//TODO: cancella stampe di prova
-				ScadenzaService scadenzaService = ScadenzaServiceImpl.getInstance();
-				listaUtenti = scadenzaService.listaUtentiScadenze();
-				System.out.println("------------lista utenti---------------");
-				for(Utente u1: listaUtenti) {
-					System.out.println(u1.getNome());
-				}
-			} catch (Eccezione e) {
-				System.out.println("------------fallito---------------");
-				e.printStackTrace();
-			}
-			request.setAttribute("listaUtenti", listaUtenti);
-			pagina = "gestione-scadenze";
+			pagina = gestioneScadenze(request);
 			break;
 		case "lista-libri-gestore":
 			pagina = "lista-libri-gestore";
@@ -217,11 +201,12 @@ public class Servlet extends HttpServlet {
 		}
 		return pagina;
 	}
+
 	private List<Libro> listaLibriGestore(HttpServletRequest request, String key) {
 		List<Libro> listaLibri = new ArrayList<>();
 		try {
 			listaLibri = LibroServiceImpl.getIstance().getList(key);
-		}catch(Eccezione e){
+		} catch (Eccezione e) {
 			System.out.println(e.getMessage());
 			pagina = "lista-libri-gestore";
 		}
@@ -242,4 +227,22 @@ public class Servlet extends HttpServlet {
 		return "home-pubblica";
 	}
 
+	private String gestioneScadenze(HttpServletRequest request) {
+		ListaUtente listaUtenti = new ListaUtente();
+		listaUtenti.setLista(null);
+		try {
+			// TODO: cancella stampe di prova
+			ScadenzaService scadenzaService = ScadenzaServiceImpl.getInstance();
+			listaUtenti.setLista(scadenzaService.listaUtentiScadenze());  
+			System.out.println("------------lista utenti---------------");
+			for (Utente u1 : listaUtenti.getLista()) {
+				System.out.println(u1.getNome());
+			}
+		} catch (Eccezione e) {
+			System.out.println("------------fallito---------------");
+			e.printStackTrace();
+		}
+		request.setAttribute("listaUtenti", listaUtenti);
+		return "gestione-scadenze";
+	}
 }
