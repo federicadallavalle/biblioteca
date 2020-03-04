@@ -1,7 +1,7 @@
 <%@page import="model.Utente"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<jsp:useBean id="listaUtenti" scope="request" class="model.ListaUtente" />
+<jsp:useBean id="listaUtenti" scope="session" class="model.ListaUtente" />
 <!DOCTYPE html>
 <head>
 <meta charset="ISO-8859-1">

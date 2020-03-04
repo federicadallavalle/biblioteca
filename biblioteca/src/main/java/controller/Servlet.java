@@ -233,16 +233,11 @@ public class Servlet extends HttpServlet {
 		try {
 			// TODO: cancella stampe di prova
 			ScadenzaService scadenzaService = ScadenzaServiceImpl.getInstance();
-			listaUtenti.setLista(scadenzaService.listaUtentiScadenze());  
-			System.out.println("------------lista utenti---------------");
-			for (Utente u1 : listaUtenti.getLista()) {
-				System.out.println(u1.getNome());
-			}
+			listaUtenti.setLista(scadenzaService.listaUtentiScadenze());
 		} catch (Eccezione e) {
-			System.out.println("------------fallito---------------");
 			e.printStackTrace();
 		}
-		request.setAttribute("listaUtenti", listaUtenti);
+		request.getSession().setAttribute("listaUtenti", listaUtenti);
 		return "gestione-scadenze";
 	}
 }
