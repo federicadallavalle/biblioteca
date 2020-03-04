@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -40,7 +41,7 @@ public class Servlet extends HttpServlet {
 		switch (comando) {
 		case "create-prestito":
 			Prestito p = new Prestito();
-			p.setDataInizio(LocalDate.now());
+			p.setDataInizio(LocalDate.parse(request.getParameter("dataInizio")));
 			p.getUtente().setId(Long.valueOf(request.getParameter("idUtente")));
 			p.getLibro().setId(Long.valueOf(request.getParameter("idLibro")));
 			try {
@@ -53,9 +54,9 @@ public class Servlet extends HttpServlet {
 		case "update-prestito":
 			p = new Prestito();
 			p.setId(Long.parseLong(request.getParameter("idPrestito")));
-			p.setDataInizio(LocalDate.now());
-			p.setDataConsegna(LocalDate.now());
-			p.setDataUltimoSollecito(LocalDate.now());
+		    p.setDataInizio(LocalDate.parse(request.getParameter("dataInizio")));
+		    p.setDataConsegna(LocalDate.parse(request.getParameter("dataConsegna")));
+			p.setDataUltimoSollecito(LocalDate.parse(request.getParameter("dataUltimoSollecito")));
 			p.getUtente().setId(Long.valueOf(request.getParameter("idUtente")));
 			p.getLibro().setId(Long.valueOf(request.getParameter("idLibro")));
 			try {
