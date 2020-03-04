@@ -4,17 +4,17 @@
 	pageEncoding="ISO-8859-1"%>
 <jsp:useBean id="libri" scope="session" class="model.ListaLibri" />
 <%
-	// TODO : stub
-	Libro libro = new Libro();
-	libro.setId(1l);
-	libro.setTitolo("TitoloTest1");
-	libro.setQta(12);
-	libri.getLista().add(libro);
-	libro = new Libro();
-	libro.setId(2l);
-	libro.setTitolo("TitoloTest2");
-	libro.setQta(24);
-	libri.getLista().add(libro);
+// 	// TODO : stub
+// 	Libro libro = new Libro();
+// 	libro.setId(1l);
+// 	libro.setTitolo("TitoloTest1");
+// 	libro.setQta(12);
+// 	libri.getLista().add(libro);
+// 	libro = new Libro();
+// 	libro.setId(2l);
+// 	libro.setTitolo("TitoloTest2");
+// 	libro.setQta(24);
+// 	libri.getLista().add(libro);
 %>
 <!DOCTYPE html>
 <html>
@@ -25,7 +25,12 @@
 <body>
 	<a href="account.do"><button style="position: absolute; right: 0;">Account</button></a>
 	<h1>HOME</h1>
-	<table style="margin-top: 10px">
+	<table style="margin-top: 10px; text-align: center;">
+		<tr>
+			<th>Titolo</th>
+			<th>Quantità</th>
+			<th>Dettagli</th>
+		</tr>
 		<%
 			for (Libro l : libri.getLista()) {
 		%>

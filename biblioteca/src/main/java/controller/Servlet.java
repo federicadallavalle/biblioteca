@@ -14,8 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Libro;
+import model.ListaLibri;
 import model.Prestito;
 import model.Utente;
+import service.LibroService;
 import service.ScadenzaService;
 import serviceimpl.LibroServiceImpl;
 import serviceimpl.LoginServiceImpl;
@@ -41,8 +43,8 @@ public class Servlet extends HttpServlet {
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
-		RequestDispatcher rd;
-		ServletContext sc;
+//		RequestDispatcher rd;
+//		ServletContext sc;
 		pagina = "";
 		String path = request.getServletPath();
 		String comando = path.substring(1, path.lastIndexOf(".do"));
@@ -72,7 +74,7 @@ public class Servlet extends HttpServlet {
 			break;
 
 		case "registrazione":
-				pagina=registrazione(request);
+			pagina = registrazione(request);
 			break;
 
 		case "gestione-scadenze":
@@ -94,6 +96,12 @@ public class Servlet extends HttpServlet {
 			break;
 		case "lista-libri-gestore":
 			pagina = "lista-libri-gestore";
+			break;
+		case "lista-libri":
+			pagina = listaLibri(request);
+			break;
+		default:
+			pagina = "index";
 			break;
 		}
 		response.sendRedirect(request.getContextPath() + "/" + pagina + ".jsp");
@@ -169,7 +177,7 @@ public class Servlet extends HttpServlet {
 		}
 		return pagina;
 	}
-	
+
 	private String registrazione(HttpServletRequest request) {
 		String nome = request.getParameter("nome");
 		String cognome = request.getParameter("cognome");
@@ -181,20 +189,22 @@ public class Servlet extends HttpServlet {
 		String cap = request.getParameter("cap");
 		String telefono = request.getParameter("telefono");
 		String ruolo = "iscritto";
-		String username=nome+RandomPassword.getPassword(3);
-		String password= RandomPassword.getPassword(7);
+		String username = nome + RandomPassword.getPassword(3);
+		String password = RandomPassword.getPassword(7);
 
-		Utente u = new Utente(nome,cognome,email,via,civico,citta,provincia,cap,telefono,ruolo,username,password);
+		Utente u = new Utente(nome, cognome, email, via, civico, citta, provincia, cap, telefono, ruolo, username,
+				password);
 		try {
 			UtenteServiceImpl us = UtenteServiceImpl.getIstance();
 			us.createUtente(u);
-			pagina="registrazione-utente";
+			pagina = "registrazione-utente";
 			return pagina;
 		} catch (Eccezione e) {
-			
+
 			return pagina;
 		}
 	}
+
 	private String passwordDimenticata(HttpServletRequest request) {
 		String email = request.getParameter("email");
 		utente = Utente.getEmptyUtente();
@@ -217,4 +227,19 @@ public class Servlet extends HttpServlet {
 		}
 		return listaLibri;
 	}
+
+	private String listaLibri(HttpServletRequest request) {
+		System.out.println("Entrati nel metodo listaLibri.");
+		ListaLibri lista = new ListaLibri();
+		// TODO : stub
+//		lista.setLista(LibroServiceImpl.getInstance().searchLibro(""));
+		lista.getLista().add(new Libro(null, "test1", null, null, 12, null, 0, 0, null, null));
+		lista.getLista().add(new Libro(null, "test2", null, null, 16, null, 0, 0, null, null));
+		lista.getLista().add(new Libro(null, "test3", null, null, 18, null, 0, 0, null, null));
+		// TODO : fine stub
+		request.getSession().setAttribute("libri", lista);
+		request.setAttribute("libri", lista);
+		return "home-pubblica";
+	}
+
 }
