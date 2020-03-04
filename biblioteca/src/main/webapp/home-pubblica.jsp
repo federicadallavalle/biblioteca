@@ -2,20 +2,19 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%-- <jsp:useBean id="libri" scope="session" class="ArrayList<Libro>" /> --%>
+<jsp:useBean id="libri" scope="session" class="model.ListaLibri" />
 <%
-	ArrayList<Libro> libri = new ArrayList<>();
 	// TODO : stub
 	Libro libro = new Libro();
 	libro.setId(1l);
 	libro.setTitolo("TitoloTest1");
 	libro.setQta(12);
-	libri.add(libro);
+	libri.getLista().add(libro);
 	libro = new Libro();
 	libro.setId(2l);
 	libro.setTitolo("TitoloTest2");
 	libro.setQta(24);
-	libri.add(libro);
+	libri.getLista().add(libro);
 %>
 <!DOCTYPE html>
 <html>
@@ -23,11 +22,12 @@
 <meta charset="ISO-8859-1">
 <title>HOME-PUBBLICA</title>
 </head>
-<h1>HOME</h1>
 <body>
-	<table>
+	<a href="account.do"><button style="position: absolute; right: 0;">Account</button></a>
+	<h1>HOME</h1>
+	<table style="margin-top: 10px">
 		<%
-			for (Libro l : libri) {
+			for (Libro l : libri.getLista()) {
 		%>
 		<tr>
 			<td>
