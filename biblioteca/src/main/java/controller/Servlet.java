@@ -90,7 +90,7 @@ public class Servlet extends HttpServlet {
 			System.out.println(password);
 			if (user.isBlank() || password.isBlank()) {
 				msg = "Impossibile avere campi vuoti";
-				request.setAttribute(msg, msg);
+				request.setAttribute("msg", msg);
 				pagina = "login";
 				break;
 			}
