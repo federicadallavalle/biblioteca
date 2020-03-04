@@ -9,9 +9,14 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-
+//manuel
 public class MessageSender {
-
+	
+	/**
+	 * Metodo creato apposta per l'invio delle email della jsp "password-dimenticata" poiche accetta come parametri la nuova password e l'email dell'utente.
+	 * @param newPass è la password che viene generata randomicamente e che verrà sovrascritta alla password già esistente nel database.
+	 * @param emailUtente è l'email associata all'utente che richiede la password nuova.
+	 */
 	public static void invioEmail(String newPass, String emailUtente) {
 		String nuovaPassword = newPass;
 		String sendTo = emailUtente;
@@ -47,11 +52,12 @@ public class MessageSender {
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(sendTo));
 
 			// Setta il campo dell'oggetto
-			message.setSubject("Campo dell'oggetto");
+			message.setSubject("Richiesta Nuova Password");
 
 			// Setta il messaggio vero e proprio
-			message.setText("Hai richiesto la nuova password. La nuova password �" + nuovaPassword
-					+ " , fai il login su: localhost:8080/login.jsp");
+			message.setText(" Hai richiesto una nuova password. La trovi qui --> " + nuovaPassword
+						  + " Inserisci la nuova password nel prossimo login che effetuerai. Di seguito trovi"
+						  + " il link per tornare alla pagina di login. localhost:8080/login.jsp ");
 
 			System.out.println("Inviando il messaggio...");
 			// Invia il messaggio

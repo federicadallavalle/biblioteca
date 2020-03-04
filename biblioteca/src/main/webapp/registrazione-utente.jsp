@@ -17,7 +17,7 @@
 	<h1>Registrazione Utente</h1>
 	<br>
 	<div style="display: flex;">
-		<form action="/cerca-utente">
+		<form action="registrazione.do" method="post">
 			<label for="name">Nome: </label> 
 			<input type="text" id="name" name="nome" value="nome">
 			<br>
@@ -42,6 +42,8 @@
 			<br>
 			<label for="telefono">Telefono: </label> 
 			<input type="text" id="telefono" name="telefono" value="telefono">
+			<input type="submit"  value="submit">
+			
 			<br>
 			<label for="ruolo">Ruolo: </label> 
 			<input type="radio" id="ruolo" name="iscritto" value="iscritto">Iscritto

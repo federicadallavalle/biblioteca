@@ -12,3 +12,7 @@ biblioteca/target/classes/utilities/DataBase.class
 biblioteca/target/classes/serviceimpl/LoginServiceImpl.class
 
 biblioteca/target/classes/model/dao/UtenteDao.class
+
+biblioteca/target/classes/model/Utente.class
+
+*.class
