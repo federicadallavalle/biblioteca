@@ -81,7 +81,7 @@ public class Servlet extends HttpServlet {
 			String telefono = request.getParameter("telefono");
 			String ruolo = "iscritto";
 			String username=nome+RandomPassword.getPassword(3);
-			password= RandomPassword.getPassword(7);
+			String password= RandomPassword.getPassword(7);
 			
 			System.out.println("testoooooooooooooooooooooooooooooooooooooooooooooooooo");
 			Utente u = new Utente(nome,cognome,email,via,civico,citta,provincia,cap,telefono,ruolo,username,password);
