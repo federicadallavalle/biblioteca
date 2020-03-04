@@ -180,8 +180,7 @@ public class Servlet extends HttpServlet {
 			pagina="registrazione-utente";
 			return pagina;
 		} catch (Eccezione e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
 			return pagina;
 		}
 	}
