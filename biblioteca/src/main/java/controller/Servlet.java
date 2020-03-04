@@ -123,7 +123,18 @@ public class Servlet extends HttpServlet {
 			}
 			break;
 
-		case "test":
+		case "registrazione":
+			String nome = request.getParameter("nome");
+			String cognome = request.getParameter("cognome");
+			 email = request.getParameter("email");
+			String via = request.getParameter("via");
+			String civico = request.getParameter("civico");
+			String citta = request.getParameter("citta");
+			String provincia = request.getParameter("provincia");
+			String cap = request.getParameter("cap");
+			String telefono = request.getParameter("telefono");
+			String ruolo = request.getParameter("ruolo");
+			
 			System.out.println("testoooooooooooooooooooooooooooooooooooooooooooooooooo");
 			Utente u = new Utente();
 			try {
@@ -135,6 +146,8 @@ public class Servlet extends HttpServlet {
 			}
 
 			break;
+			
+		
 		
 		case "gestione-scadenze":
 			List<Utente> listaUtenti = null;
