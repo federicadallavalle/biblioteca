@@ -12,7 +12,7 @@
     <table>
                                                      
                         <tbody>
-                            <c:forEach var="user" items="${listUser}">
+                            <c:forEach var="user" items="${listaUtenti}">
                                 <tr>
                                     <td>
                                         <c:out value="${user.nome}" />Nome
@@ -26,12 +26,12 @@
                                     <td>
                                         <c:out value="${user.email}" />email
                                     </td>
-                                    <td><button type="button">Dettagli<a href="edit?id=<c:out value='${user.id}' </a></button>
-                            </td>
-                            </tr>
+                                    <td><button type="button">Dettagli<a href="edit?id=<c:out value='${user.id}'> </a></button>
+                            		</td>
+                            	</tr>
                             </c:forEach>
                           </tbody>
-                    </table>
+     </table>
 </div>
 </body>
 </html>
