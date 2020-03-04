@@ -1,14 +1,5 @@
 package serviceimpl;
 
-import java.util.Properties;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -80,19 +71,21 @@ public class LoginServiceImpl implements LoginService {
 		if (lista.isEmpty()) {
 			throw new Eccezione("Email non trovata");
 		}
-
-		// Recupero l'email dell'utente trovato e preparo il messaggio
-		// e cambio la password vecchia in quella generata
 		Utente utenteTrovato = lista.get(0);
+		
+		// Rimpiazzo la vecchia password con la nuova password
 		utenteTrovato.setPassword(nuovaPassword);
 		System.out.println(utenteTrovato);
 		UtenteDao.modificaUtente(utenteTrovato, utenteTrovato.getId());
 		System.out.println(utenteTrovato);
+		
+		// Invio l'email con il metodo apposito e gli passo la password e l'indirizzo email
 		String sendTo = utenteTrovato.getEmail();
 		MessageSender.invioEmail(nuovaPassword, sendTo);
 		
 		pagina = "password-dimenticata";
 		return pagina;
+		//TODO: mostrare messaggio di conferma password inviata
 	}
 
 }
