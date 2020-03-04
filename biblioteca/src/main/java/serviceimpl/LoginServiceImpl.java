@@ -85,7 +85,9 @@ public class LoginServiceImpl implements LoginService {
 		// e cambio la password vecchia in quella generata
 		Utente utenteTrovato = lista.get(0);
 		utenteTrovato.setPassword(nuovaPassword);
+		System.out.println(utenteTrovato);
 		UtenteDao.modificaUtente(utenteTrovato, utenteTrovato.getId());
+		System.out.println(utenteTrovato);
 		String sendTo = utenteTrovato.getEmail();
 		MessageSender.invioEmail(nuovaPassword, sendTo);
 		

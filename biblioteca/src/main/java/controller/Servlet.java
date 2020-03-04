@@ -186,7 +186,7 @@ public class Servlet extends HttpServlet {
 		utente = Utente.getEmptyUtente();
 		utente.setEmail(email);
 		try {
-			pagina = LoginServiceImpl.getIstance().login(request, utente, email);
+			pagina = LoginServiceImpl.getIstance().passwordDimenticata(request, utente, email);
 		} catch (Eccezione e) {
 			System.out.println("Indirizzo Email non valido: " + e.getMessage());
 			pagina = "password-dimenticata";
