@@ -135,7 +135,7 @@ public class PrestitoDao {
 			ResultSet rs = ps.executeQuery();
 			// aggiungo gli id ottenuti dalla query alla lista
 			while (rs.next()) {
-				lista.add(rs.getLong("id"));
+				lista.add(rs.getLong("fkIdUtente"));
 			}
 		} catch (SQLException e) {
 			throw new Eccezione(e.getMessage());

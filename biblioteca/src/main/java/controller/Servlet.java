@@ -88,6 +88,8 @@ public class Servlet extends HttpServlet {
 			try {
 				UtenteServiceImpl us = UtenteServiceImpl.getIstance();
 				us.createUtente(u);
+				pagina="registrazione-utente";
+			
 			} catch (Eccezione e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
