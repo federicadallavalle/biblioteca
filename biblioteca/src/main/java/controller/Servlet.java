@@ -31,12 +31,14 @@ public class Servlet extends HttpServlet {
 		super();
 	}
 
+	String pagina = "";
+
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
 		RequestDispatcher rd;
 		ServletContext sc;
-		String pagina = "";
+		pagina = "";
 		String path = request.getServletPath();
 		String comando = path.substring(1, path.lastIndexOf(".do"));
 		switch (comando) {
@@ -52,6 +54,7 @@ public class Servlet extends HttpServlet {
 				System.out.println(e1.getMessage());
 			}
 			break;
+		
 		case "update-prestito":
 			p = new Prestito();
 			p.setId(Long.parseLong(request.getParameter("idPrestito")));
@@ -82,7 +85,16 @@ public class Servlet extends HttpServlet {
 		case "login":
 			String user = request.getParameter("username");
 			String password = request.getParameter("password");
-			utente = new Utente("", "", "", "", user);
+			System.out.println(password);
+			if (user.isBlank() || password.isBlank()) {
+				msg = "Impossibile avere campi vuoti";
+				request.setAttribute(msg, msg);
+				pagina = "login";
+				break;
+			}
+			// crea un utente con campi vuoti e imposta solo il nome utente
+			Utente utente = Utente.getEmptyUtente();
+			utente.setUsername(user);
 			try {
 				pagina = LoginServiceImpl.getIstance().login(request, utente, password);
 			} catch (Eccezione e) {
@@ -129,20 +141,22 @@ public class Servlet extends HttpServlet {
 			}
 			
 			break;
-			
-		
-		
+
 		case "gestione-scadenze":
 			List<Utente> listaUtenti = null;
 			try {
 				ScadenzaService scadenzaService = ScadenzaServiceImpl.getInstance();
 				listaUtenti = scadenzaService.listaUtentiScadenze();
-			} catch(Eccezione e) {
+			} catch (Eccezione e) {
 				e.printStackTrace();
 			}
 			pagina = "gestione-scadenze";
 			break;
 		}
+		response.sendRedirect(request.getContextPath() + "/" + pagina + ".jsp");
+//		sc = getServletContext();
+//		rd = sc.getRequestDispatcher("/" + pagina + ".jsp");
+//		rd.forward(request, response);
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
