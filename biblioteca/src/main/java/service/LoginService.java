@@ -11,6 +11,6 @@ public interface LoginService {
 
 	String login(HttpServletRequest request, Utente utente, String password) throws Eccezione;
 
-	void passwordDimenticata(HttpServletRequest request, Utente utente) throws Eccezione;
+	String passwordDimenticata(HttpServletRequest request, Utente utente) throws Eccezione;
 
 }
