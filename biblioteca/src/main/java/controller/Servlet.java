@@ -2,7 +2,6 @@ package controller;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -14,16 +13,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.Prestito;
 import model.Utente;
-import service.ScadenzaService;
 import serviceimpl.LoginServiceImpl;
 import serviceimpl.PrestitoServiceImpl;
-import serviceimpl.ScadenzaServiceImpl;
 import serviceimpl.UtenteServiceImpl;
 import utilities.Eccezione;
 
 @WebServlet("*.do")
 public class Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
+	Utente utente;
 
 	public Servlet() {
 		super();
@@ -38,6 +37,7 @@ public class Servlet extends HttpServlet {
 		String path = request.getServletPath();
 		String comando = path.substring(1, path.lastIndexOf(".do"));
 		switch (comando) {
+
 		case "create-prestito":
 			Prestito p = new Prestito();
 			p.setDataInizio(LocalDate.now());
@@ -49,7 +49,6 @@ public class Servlet extends HttpServlet {
 				System.out.println(e1.getMessage());
 			}
 			break;
-		
 		case "update-prestito":
 			p = new Prestito();
 			p.setId(Long.parseLong(request.getParameter("idPrestito")));
@@ -66,15 +65,6 @@ public class Servlet extends HttpServlet {
 			break;
 
 		case "search-prestito":
-			String idUtente = request.getParameter("idUtente");
-			String idLibro = request.getParameter("idLibro");
-			Long idToSearch;
-			if (!idUtente.equals("") && idUtente != null) {
-				idToSearch = Long.valueOf(idUtente);
-			} else if (!idLibro.equals("") && idLibro != null) {
-				idToSearch = Long.valueOf(idLibro);
-			}
-//			PrestitoServiceImpl.getInstance().
 			break;
 
 		case "delete-prestito":
@@ -87,23 +77,10 @@ public class Servlet extends HttpServlet {
 			break;
 
 		case "login":
-			String msg;
-			// recupera username e password dal form di login.jsp e controlla che nessuno
-			// dei due sia vuoto
 			String user = request.getParameter("username");
 			String password = request.getParameter("password");
-				System.out.println(password);
-			if (user.isBlank() || password.isBlank()) {
-				msg = "Impossibile avere campi vuoti";
-				request.setAttribute(msg, msg);
-				pagina = "login";
-				break;
-			}
-			// crea un utente con campi vuoti e imposta solo il nome utente
-			Utente utente = Utente.getEmptyUtente();
-			utente.setUsername(user);
+			utente = new Utente("", "", "", "", user);
 			try {
-				// chiama il service di login passando l'utente e la password inserita
 				pagina = LoginServiceImpl.getIstance().login(request, utente, password);
 			} catch (Eccezione e) {
 				System.out.println("Utente non trovato: " + e.getMessage());
@@ -111,18 +88,20 @@ public class Servlet extends HttpServlet {
 			}
 			break;
 
-		case "password-dimenticata": // manuel
+		case "password-dimenticata":
 			String email = request.getParameter("email");
-			utente = Utente.getEmptyUtente();
-			utente.setEmail(email);
+			utente = new Utente("", "", email, "", "");
 			try {
-				pagina = LoginServiceImpl.getIstance().passwordDimenticata(request, utente, email);
+				pagina = LoginServiceImpl.getIstance().login(request, utente, email);
 			} catch (Eccezione e) {
 				System.out.println("Indirizzo Email non valido: " + e.getMessage());
 				pagina = "password-dimenticata";
 			}
+			sc = getServletContext();
+			rd = sc.getRequestDispatcher("/" + pagina + ".jsp");
+			rd.forward(request, response);
 			break;
-
+		
 		case "test":
 			System.out.println("testoooooooooooooooooooooooooooooooooooooooooooooooooo");
 			Utente u = new Utente();
@@ -133,23 +112,10 @@ public class Servlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
+			break;
 
-			break;
-		
-		case "gestione-scadenze":
-			List<Utente> listaUtenti = null;
-			try {
-				ScadenzaService scadenzaService = ScadenzaServiceImpl.getInstance();
-				listaUtenti = scadenzaService.listaUtentiScadenze();
-			} catch(Eccezione e) {
-				e.printStackTrace();
-			}
-			pagina = "gestione-scadenze";
-			break;
 		}
-		sc = getServletContext();
-		rd = sc.getRequestDispatcher("/" + pagina + ".jsp");
-		rd.forward(request, response);
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
