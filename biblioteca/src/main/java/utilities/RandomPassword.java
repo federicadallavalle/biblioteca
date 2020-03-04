@@ -11,7 +11,7 @@ public class RandomPassword {
 	    { 
 	  
 	        // Caratteri che uso nello StringBuilder
-	        String caratteriUsati = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"+"0123456789"+"abcdefghijklmnopqrstuvxyz"+",.-_?^!$%&"; 
+	        String caratteriUsati = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"+"0123456789"+"abcdefghijklmnopqrstuvxyz"+"-_?!$%&"; 
 	  
 	        // Creo StringBuilder che prende in entrata la lunghezza n della password da generare 
 	        StringBuilder sb = new StringBuilder(n); 
