@@ -18,3 +18,5 @@ biblioteca/target/classes/model/Utente.class
 *.class
 
 *.MF
+
+biblioteca/target/m2e-wtp/web-resources/META-INF/
