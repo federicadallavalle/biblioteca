@@ -76,8 +76,8 @@ public class Servlet extends HttpServlet {
 			pagina = registrazione(request);
 			break;
 		case "cerca-utenti":
-			pagina=cercaUtente(request);
-		break;
+			pagina = cercaUtente(request);
+			break;
 
 		case "gestione-scadenze":
 			List<Utente> listaUtenti = null;
@@ -97,11 +97,16 @@ public class Servlet extends HttpServlet {
 			pagina = "gestione-scadenze";
 			break;
 		case "lista-libri-gestore":
+			String key = request.getParameter("cerca");
+			ListaLibri lista = listaLibriGestore(request, key);
+			request.getSession().setAttribute("listaLibri", lista);
 			pagina = "lista-libri-gestore";
 			break;
 		case "lista-libri":
 			pagina = listaLibri(request);
 			break;
+		case "modifica-libro":
+			System.out.println(request.getParameter("id"));
 		default:
 			pagina = "index";
 			break;
@@ -121,8 +126,6 @@ public class Servlet extends HttpServlet {
 			throws ServletException, IOException {
 		processRequest(request, response);
 	}
-	
-	
 
 	private void createPrestito(HttpServletRequest request) {
 		p = new Prestito();
@@ -169,23 +172,21 @@ public class Servlet extends HttpServlet {
 			msg = "Impossibile avere campi vuoti";
 			pagina = "login";
 		} else {
-			// crea un utente con campi vuoti e imposta solo il nome utente
-			Utente utente = Utente.getEmptyUtente();
-			utente.setUsername(user);
 			try {
-				pagina = LoginServiceImpl.getIstance().login(request, utente, password);
+				pagina = LoginServiceImpl.getIstance().login(request, user, password);
 			} catch (Eccezione e) {
 				System.out.println("Utente non trovato: " + e.getMessage());
 				pagina = "login";
 			}
 		}
+
 		return pagina;
 	}
-	
+
 	private String cercaUtente(HttpServletRequest request) {
 		List<Utente> listaUtenti = new ArrayList<Utente>();
 		ListaUtente lista = (ListaUtente) request.getSession().getAttribute("listaUtenti");
-		
+
 		String nome = request.getParameter("nome");
 		System.out.println(nome);
 		String cognome = request.getParameter("cognome");
@@ -196,28 +197,26 @@ public class Servlet extends HttpServlet {
 		System.out.println(username);
 		String ruolo = request.getParameter("ruolo");
 		System.out.println(ruolo);
-		
-		
-		
-		
+
 		Utente u = Utente.getEmptyUtente();
 		u.setNome(nome);
 		u.setNome(cognome);
 		u.setNome(email);
 		u.setUsername(username);
 		try {
-			listaUtenti=UtenteServiceImpl.getIstance().searchUtente(u);
+			listaUtenti = UtenteServiceImpl.getIstance().searchUtente(u);
 			lista.setLista(listaUtenti);
 			request.getSession().setAttribute("listaUtenti", lista);
-			pagina="gestione-utente";
+			pagina = "gestione-utente";
 			return pagina;
 		} catch (Eccezione e) {
 			System.out.println(e.getMessage());
 		}
-		
-		pagina="gestione-utente";
+
+		pagina = "gestione-utente";
 		return pagina;
 	}
+
 	private String registrazione(HttpServletRequest request) {
 		String nome = request.getParameter("nome");
 		String cognome = request.getParameter("cognome");
@@ -258,8 +257,8 @@ public class Servlet extends HttpServlet {
 		return pagina;
 	}
 
-	private List<Libro> listaLibriGestore(HttpServletRequest request, String key) {
-		List<Libro> listaLibri = new ArrayList<>();
+	private ListaLibri listaLibriGestore(HttpServletRequest request, String key) {
+		ListaLibri listaLibri = new ListaLibri();
 		try {
 			listaLibri = LibroServiceImpl.getIstance().getList(key);
 		} catch (Eccezione e) {
@@ -274,9 +273,9 @@ public class Servlet extends HttpServlet {
 		ListaLibri lista = new ListaLibri();
 		// TODO : stub
 //		lista.setLista(LibroServiceImpl.getInstance().searchLibro(""));
-		lista.getLista().add(new Libro(null, "test1", null, null, 12, null, 0, 0, null, null));
-		lista.getLista().add(new Libro(null, "test2", null, null, 16, null, 0, 0, null, null));
-		lista.getLista().add(new Libro(null, "test3", null, null, 18, null, 0, 0, null, null));
+		lista.getLista().add(new Libro(null, "test1", null, null, 12, null, 0, null, null));
+		lista.getLista().add(new Libro(null, "test2", null, null, 16, null, 0, null, null));
+		lista.getLista().add(new Libro(null, "test3", null, null, 18, null, 0, null, null));
 		// TODO : fine stub
 		request.getSession().setAttribute("libri", lista);
 		request.setAttribute("libri", lista);

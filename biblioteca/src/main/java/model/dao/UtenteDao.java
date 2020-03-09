@@ -64,14 +64,14 @@ public class UtenteDao {
 				System.out.println(utente);
 				lista.add(utente);
 			}
-			
+
 //			Chiusura db
 			ps.close();
 			conn.close();
-			
+
 		} catch (SQLException e) {
 			throw new Eccezione(e.getMessage());
-			
+
 		}
 		return lista;
 	}
@@ -238,5 +238,27 @@ public class UtenteDao {
 		} catch (SQLException e) {
 			throw new Eccezione(e.getMessage());
 		}
+	}
+
+	public static Utente accessoUtente(String username) throws Eccezione {
+		Utente utente = new Utente();
+		Connection conn = getConnection();
+		String sql = "SELECT * FROM biblioteca.utente WHERE username = ?";
+		PreparedStatement ps = null;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, username);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+//				Impostazione parametri dell'oggetto trovato
+				utente.setId(rs.getLong("id"));
+				utente.setRuolo(rs.getString("ruolo"));
+				utente.setUsername(rs.getString("username"));
+				utente.setPassword(rs.getString("password"));
+			}
+		} catch (SQLException e) {
+			throw new Eccezione(e.getMessage());
+		}
+		return utente;
 	}
 }

@@ -25,12 +25,10 @@ public class LoginServiceImpl implements LoginService {
 	}
 
 	@Override
-	public String login(HttpServletRequest request, Utente utente, String password) throws Eccezione {
+	public String login(HttpServletRequest request, String username, String password) throws Eccezione {
 		String pagina = "";
-		// cerca l'utente tramite username e password (recupera una lista di lunghezza 1
-		// in quanto l'username � univoco)
-		List<Utente> lista = UtenteDao.cercaUtente(utente);
-		Utente utenteTrovato = lista.get(0);
+		// cerca l'utente tramite username in quanto è univoco
+		Utente utenteTrovato = UtenteDao.accessoUtente(username);
 		// se la password dell'utente non corrisponde alla password inserita lancia un
 		// eccezione
 		if (!password.equals(utenteTrovato.getPassword())) {

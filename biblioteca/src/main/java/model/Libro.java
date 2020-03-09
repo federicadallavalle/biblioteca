@@ -11,11 +11,10 @@ public class Libro {
 	private int qta;
 	private String isbn;
 	private int scaffale;
-	private int corsia;
 	private String libreria;
 	private List<Prestito> prestiti;
 	
-	public Libro(Long id, String titolo, String autore, String editore, int qta, String isbn, int scaffale, int corsia,
+	public Libro(Long id, String titolo, String autore, String editore, int qta, String isbn, int scaffale,
 			String libreria, List<Prestito> prestiti) {
 		this.id = id;
 		this.titolo = titolo;
@@ -24,7 +23,6 @@ public class Libro {
 		this.qta = qta;
 		this.isbn = isbn;
 		this.scaffale = scaffale;
-		this.corsia = corsia;
 		this.libreria = libreria;
 		this.prestiti = prestiti;
 	}
@@ -86,14 +84,6 @@ public class Libro {
 
 	public void setScaffale(int scaffale) {
 		this.scaffale = scaffale;
-	}
-
-	public int getCorsia() {
-		return corsia;
-	}
-
-	public void setCorsia(int corsia) {
-		this.corsia = corsia;
 	}
 
 	public String getLibreria() {

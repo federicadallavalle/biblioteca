@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListaLibri {
+
 	private List<Libro> lista = new ArrayList<>();
 
 	public List<Libro> getLista() {
@@ -12,5 +13,9 @@ public class ListaLibri {
 
 	public void setLista(List<Libro> lista) {
 		this.lista = lista;
+	}
+	
+	public void addLibro(Libro libro) {
+		lista.add(libro);
 	}
 }

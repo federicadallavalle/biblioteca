@@ -23,7 +23,6 @@ CREATE TABLE IF NOT EXISTS `biblioteca`.`libro` (
   `editore` VARCHAR(45) NOT NULL,
   `isbn` VARCHAR(45) NOT NULL,
   `quantita` VARCHAR(45) NOT NULL,
-  `corsia` VARCHAR(45) NULL DEFAULT NULL,
   `libreria` VARCHAR(45) NULL DEFAULT NULL,
   `scaffale` INT NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -101,31 +100,31 @@ VALUES ('n3', 'c3', 'e3', 't3', 'v3', 'civ3', 'citta3', 'p3', '13', 'gestore', '
 INSERT INTO `biblioteca`.`utente` (`nome`, `cognome`, `email`, `telefono`, `via`, `civico`, `citta`, `provincia`, `cap`, `ruolo`, `username`, `password`) 
 VALUES ('n4', 'c4', 'e4', 't4', 'v4', 'civ4', 'citta4', 'p4', '14', 'gestore', 'user4', 'pass4');
 INSERT INTO `biblioteca`.`utente` (`nome`, `cognome`, `email`, `telefono`, `via`, `civico`, `citta`, `provincia`, `cap`, `ruolo`, `username`, `password`) 
-VALUES ('n5', 'c5', 'e5', 't5', 'v5', 'civ5', 'citta5', 'p5', '15', 'amministatore', 'user5', 'pass5');
+VALUES ('n5', 'c5', 'e5', 't5', 'v5', 'civ5', 'citta5', 'p5', '15', 'amministratore', 'user5', 'pass5');
 INSERT INTO `biblioteca`.`utente` (`nome`, `cognome`, `email`, `telefono`, `via`, `civico`, `citta`, `provincia`, `cap`, `ruolo`, `username`, `password`) 
-VALUES ('n6', 'c6', 'e6', 't6', 'v6', 'civ6', 'citta6', 'p6', '16', 'amministatore', 'user6', 'pass6');
+VALUES ('n6', 'c6', 'e6', 't6', 'v6', 'civ6', 'citta6', 'p6', '16', 'amministratore', 'user6', 'pass6');
 
 
-INSERT INTO `biblioteca`.`libro` (`titolo`, `autore`, `editore`, `isbn`, `quantita`, `corsia`, `libreria`, `scaffale`) 
-VALUES ('t1', 'a1', 'e1', 'i1', '1', 'a', 'a', '1');
-INSERT INTO `biblioteca`.`libro` (`titolo`, `autore`, `editore`, `isbn`, `quantita`, `corsia`, `libreria`, `scaffale`) 
-VALUES ('t2', 'a2', 'e2', 'i2', '2', 'b', 'b', '2');
-INSERT INTO `biblioteca`.`libro` (`titolo`, `autore`, `editore`, `isbn`, `quantita`, `corsia`, `libreria`, `scaffale`) 
-VALUES ('t3', 'a3', 'e3', 'i3', '3', 'c', 'c', '3');
-INSERT INTO `biblioteca`.`libro` (`titolo`, `autore`, `editore`, `isbn`, `quantita`, `corsia`, `libreria`, `scaffale`) 
-VALUES ('t4', 'a4', 'e4', 'i4', '4', 'd', 'd', '4');
-INSERT INTO `biblioteca`.`libro` (`titolo`, `autore`, `editore`, `isbn`, `quantita`, `corsia`, `libreria`, `scaffale`) 
-VALUES ('t5', 'a5', 'e5', 'i5', '5', 'e', 'e', '5');
-INSERT INTO `biblioteca`.`libro` (`titolo`, `autore`, `editore`, `isbn`, `quantita`, `corsia`, `libreria`, `scaffale`) 
-VALUES ('t6', 'a6', 'e6', 'i6', '6', 'f', 'f', '6');
-INSERT INTO `biblioteca`.`libro` (`titolo`, `autore`, `editore`, `isbn`, `quantita`, `corsia`, `libreria`, `scaffale`) 
-VALUES ('t7', 'a7', 'e7', 'i7', '7', 'g', 'g', '7');
-INSERT INTO `biblioteca`.`libro` (`titolo`, `autore`, `editore`, `isbn`, `quantita`, `corsia`, `libreria`, `scaffale`) 
-VALUES ('t8', 'a8', 'e8', 'i8', '8', 'h', 'h', '8');
-INSERT INTO `biblioteca`.`libro` (`titolo`, `autore`, `editore`, `isbn`, `quantita`, `corsia`, `libreria`, `scaffale`) 
-VALUES ('t9', 'a9', 'e9', 'i9', '9', 'i', 'i', '9');
-INSERT INTO `biblioteca`.`libro` (`titolo`, `autore`, `editore`, `isbn`, `quantita`, `corsia`, `libreria`, `scaffale`) 
-VALUES ('t10', 'a10', 'e10', 'i10', '10', 'j', 'j', '10');
+INSERT INTO `biblioteca`.`libro` (`titolo`, `autore`, `editore`, `isbn`, `quantita`, `libreria`, `scaffale`) 
+VALUES ('t1', 'a1', 'e1', 'i1', '1', 'a', '1');
+INSERT INTO `biblioteca`.`libro` (`titolo`, `autore`, `editore`, `isbn`, `quantita`, `libreria`, `scaffale`) 
+VALUES ('t2', 'a2', 'e2', 'i2', '2', 'b', '2');
+INSERT INTO `biblioteca`.`libro` (`titolo`, `autore`, `editore`, `isbn`, `quantita`, `libreria`, `scaffale`) 
+VALUES ('t3', 'a3', 'e3', 'i3', '3', 'c', '3');
+INSERT INTO `biblioteca`.`libro` (`titolo`, `autore`, `editore`, `isbn`, `quantita`, `libreria`, `scaffale`) 
+VALUES ('t4', 'a4', 'e4', 'i4', '4', 'd', '4');
+INSERT INTO `biblioteca`.`libro` (`titolo`, `autore`, `editore`, `isbn`, `quantita`, `libreria`, `scaffale`) 
+VALUES ('t5', 'a5', 'e5', 'i5', '5', 'e', '5');
+INSERT INTO `biblioteca`.`libro` (`titolo`, `autore`, `editore`, `isbn`, `quantita`, `libreria`, `scaffale`) 
+VALUES ('t6', 'a6', 'e6', 'i6', '6', 'f', '6');
+INSERT INTO `biblioteca`.`libro` (`titolo`, `autore`, `editore`, `isbn`, `quantita`, `libreria`, `scaffale`) 
+VALUES ('t7', 'a7', 'e7', 'i7', '7', 'g', '7');
+INSERT INTO `biblioteca`.`libro` (`titolo`, `autore`, `editore`, `isbn`, `quantita`, `libreria`, `scaffale`) 
+VALUES ('t8', 'a8', 'e8', 'i8', '8', 'h', '8');
+INSERT INTO `biblioteca`.`libro` (`titolo`, `autore`, `editore`, `isbn`, `quantita`, `libreria`, `scaffale`) 
+VALUES ('t9', 'a9', 'e9', 'i9', '9', 'i', '9');
+INSERT INTO `biblioteca`.`libro` (`titolo`, `autore`, `editore`, `isbn`, `quantita`, `libreria`, `scaffale`) 
+VALUES ('t10', 'a10', 'e10', 'i10', '10', 'j', '10');
 
 
 INSERT INTO `biblioteca`.`prestito` (`fkIdUtente`, `fkIdLibro`, `dataInizio`, `dataConsegna`) 

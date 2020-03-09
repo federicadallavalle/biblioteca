@@ -1,10 +1,9 @@
 package serviceimpl;
 
-import model.dao.LibroDao;
 
-import java.util.ArrayList;
-import java.util.List;
 import model.Libro;
+import model.ListaLibri;
+import model.dao.LibroDao;
 import service.LibroService;
 import utilities.Eccezione;
 
@@ -22,8 +21,8 @@ public class LibroServiceImpl implements LibroService {
 	}
 
 	@Override
-	public List<Libro> getList(String key) throws Eccezione {
-		List<Libro> lista = new ArrayList<Libro>();
+	public ListaLibri getList(String key) throws Eccezione {
+		ListaLibri lista = new ListaLibri();
 		try {
 			lista = LibroDao.findAllLibro(key);
 		} catch (Eccezione e) {
